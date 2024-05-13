@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/style.css">
+    <!-- Animate.JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav__container">
+            <div class="sideToggleOpen">
+                <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
+            </div>
+
+            <div class="nav__heading">
+                <h1>Dashboard</h1>
+                <p>Overview of everything</p>
+            </div>
+
+            <div class="nav__date">
+                <i data-lucide="calendar"></i>
+                <span id="currentDate"></span>
+            </div>
+        </div>
+
+    </nav>
+
+
+
+    <div class="sidePanel  animate__animated ">
+        <div class="sidePanel__header">
+            <h2>BakeTrack</h2>
+            <a href="#" class="sideToggleClose"> <i class="sidePanel__icon " data-lucide="chevrons-left"></i></a>
+
+        </div>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
+        <a href="#" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+    </div>
+
+    <div class="dashboard__container">
+
+        <div class="card__sml">
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="overlay hidden"></div>
+    <script src="/src/script.js"></script>
+    <!-- Lucid Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
