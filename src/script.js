@@ -80,3 +80,49 @@ slider.addEventListener("mousemove", (e) => {
   // Update the scroll position of the slider by subtracting the distance moved
   slider.scrollLeft = scrollLeft - walk;
 });
+
+// --------------------- FILTER ------------------
+
+// Get the input field, all card elements, and create a container for the message
+const filterInput = document.getElementById("filterInput");
+const cards = document.querySelectorAll(".card__lg");
+const messageContainer = document.createElement("div");
+messageContainer.classList.add("message");
+document.querySelector(".lg__cards").appendChild(messageContainer); // Append the message container to the cards container
+
+// Add an event listener to the input field for input events (when user types)
+filterInput.addEventListener("input", function () {
+  const filterText = this.value.toLowerCase();
+  let foundMatch = false; // Flag to track if a match is found
+
+  // Loop through each card element
+  cards.forEach((card) => {
+    const title = card.querySelector("h2").textContent.toLowerCase();
+
+    // Check if the title text of the card includes the filter text
+    if (title.includes(filterText)) {
+      card.style.display = "block"; // Show the card if there's a match
+      foundMatch = true; // Set flag to true if a match is found
+    } else {
+      card.style.display = "none"; // Hide the card if there's no match
+    }
+  });
+
+  // Display message if no match is found
+  if (!foundMatch) {
+    messageContainer.textContent = "No matching results found."; // Set the message content
+    messageContainer.style.display = "flex";
+    messageContainer.style.height = "75vh";
+    messageContainer.style.width = "100vw";
+    messageContainer.style.fontWeight = "400";
+    messageContainer.style.fontSize = "3rem";
+    messageContainer.style.color = "red";
+    messageContainer.style.marginTop = "10px";
+    messageContainer.style.flexDirection = "column";
+    messageContainer.style.justifyContent = "center";
+    messageContainer.style.alignItems = "center";
+  } else {
+    messageContainer.textContent = ""; // Clear the message if a match is found
+    messageContainer.style.display = "none"; // Hide the message container
+  }
+});
