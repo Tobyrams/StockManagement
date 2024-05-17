@@ -81,29 +81,54 @@
         <button class="btn addNewItemBtn">Add New Item</button>
       </div>
 
+      <!-- prettier-ignore -->
+      <div class="Form addItemModal hidden animate__animated animate__slideInUp">
+            <h1>Add New Item</h1>
+            <p>Enter details of the item</p>
+            <form id="addItemForm">
+            <label for="name">Name:</label>
+            <!-- prettier-ignore -->
+            <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
+
+            <label for="Quantity">Quantity:</label>
+            <!-- prettier-ignore -->
+            <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
+
+            <label for="UnitOfMeasurement">Unit Of Measurement:</label>
+            <!-- prettier-ignore -->
+            <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
+
+            <label for="expirydate">expirydate:</label>
+            <!-- prettier-ignore -->
+            <input type="date" id="expirydate" name="expirydate" required
+                /><br /><br />
+            <button class="btn" type="submit">Add Item</button>
+            </form>
+      </div>
+
       <div
-        class="Form addItemModal hidden animate__animated animate__slideInUp"
+        class="Form editItemModal hidden animate__animated animate__slideInUp"
       >
-        <h1>Add New Item</h1>
-        <p>Enter details of the item</p>
-        <form id="addItemForm">
+        <h1>Edit Item</h1>
+        <p>Edit the details of the selected Item</p>
+        <form id="editItemForm">
           <label for="name">Name:</label>
           <!-- prettier-ignore -->
-          <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
+          <input type="text" id="editname" name="name" required placeholder="Enter product name" /><br />
 
           <label for="Quantity">Quantity:</label>
           <!-- prettier-ignore -->
-          <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
+          <input type="number" id="editQuantity" name="Quantity" required placeholder="Enter the quantity" /><br />
 
           <label for="UnitOfMeasurement">Unit Of Measurement:</label>
           <!-- prettier-ignore -->
-          <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
+          <input type="text" id="editUnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
 
           <label for="expirydate">expirydate:</label>
           <!-- prettier-ignore -->
-          <input type="date" id="expirydate" name="expirydate" required
-               /><br /><br />
-          <button class="btn" type="submit">Add Item</button>
+          <input type="date" id="editexpirydate" name="expirydate" required
+            /><br /><br />
+          <button class="btn" type="submit">Edit Item</button>
         </form>
       </div>
 
@@ -133,7 +158,7 @@
           <p>Ground Beef</p>
           <p>30</p>
           <p>kg</p>
-          <p>2024-06-5</p>
+          <p>2024-06-05</p>
           <span>
             <i class="fa-regular fa-pen-to-square card__Btn"></i>
             <i class="fa-regular fa-trash-can card__Btn"></i>
@@ -157,7 +182,7 @@
           <p>Feta Cheese</p>
           <p>14</p>
           <p>kg</p>
-          <p>2024-02-5</p>
+          <p>2024-02-05</p>
           <span>
             <i class="fa-regular fa-pen-to-square card__Btn"></i>
             <i class="fa-regular fa-trash-can card__Btn"></i>
@@ -187,6 +212,7 @@
             <i class="fa-regular fa-trash-can card__Btn"></i>
           </span>
         </div>
+        <hr />
       </div>
     </div>
 
@@ -201,16 +227,19 @@
 
     <script>
       const addItemModal = document.querySelector(".addItemModal");
+      const editItemModal = document.querySelector(".editItemModal");
       const addNewItemBtn = document.querySelector(".addNewItemBtn");
       //   const overlay = document.querySelector(".overlay");
 
       addNewItemBtn.addEventListener("click", function () {
+        addItemForm.reset(); //Resets the form
         addItemModal.classList.remove("hidden");
         overlay.classList.remove("hidden");
       });
 
       overlay.addEventListener("click", function () {
         addItemModal.classList.add("hidden");
+        editItemModal.classList.add("hidden");
       });
 
       //   Filtering the items --------------
@@ -285,6 +314,41 @@
         // Hide the modal
         addItemModal.classList.add("hidden");
         overlay.classList.add("hidden");
+      });
+
+      //   function to remove the item from the list when trash button is clicked
+      const card = document.querySelector(".card");
+      card.addEventListener("click", (event) => {
+        if (event.target.classList.contains("fa-trash-can")) {
+          const cardDetails = event.target.closest(".card__details");
+          const hr = cardDetails.nextElementSibling;
+          cardDetails.remove();
+          hr.remove();
+        }
+      });
+
+      //function for the edit button
+      card.addEventListener("click", (event) => {
+        if (event.target.classList.contains("fa-pen-to-square")) {
+          const cardDetails = event.target.closest(".card__details");
+          const hr = cardDetails.nextElementSibling;
+
+          // Get the values from the card details
+          const name = cardDetails.children[0].textContent;
+          const quantity = cardDetails.children[1].textContent;
+          const unit = cardDetails.children[2].textContent;
+          const expiryDate = cardDetails.children[3].textContent;
+
+          // Fill the form with the values
+          document.getElementById("editname").value = name;
+          document.getElementById("editQuantity").value = quantity;
+          document.getElementById("editUnitOfMeasurement").value = unit;
+          document.getElementById("editexpirydate").value = expiryDate;
+
+          // Show the modal
+          editItemModal.classList.remove("hidden");
+          overlay.classList.remove("hidden");
+        }
       });
     </script>
   </body>
