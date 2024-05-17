@@ -17,8 +17,15 @@ toggeOpen.addEventListener("click", () => {
   overlay.classList.remove("hidden");
 });
 
-toggeClose.addEventListener("click", () => {
+toggeClose.addEventListener("click", function () {
   sidePanel.classList.remove("hidden");
+  removeAnimation();
+  sidePanel.classList.add("animate__slideOutLeft");
+  overlay.classList.add("hidden");
+});
+
+overlay.addEventListener("click", function () {
+  sidePanel.classList.add("hidden");
   removeAnimation();
   sidePanel.classList.add("animate__slideOutLeft");
   overlay.classList.add("hidden");
@@ -126,3 +133,12 @@ filterInput.addEventListener("input", function () {
     messageContainer.style.display = "none"; // Hide the message container
   }
 });
+
+// const addItemModal = document.querySelector(".addItemModal");
+// const addNewItemBtn = document.querySelector(".addNewItemBtn");
+
+// addNewItemBtn.addEventListener("click", function () {
+//   addItemModal.classList.remove("hidden");
+//   overlay.classList.remove("hidden");
+//   console.log("clicked");
+// });

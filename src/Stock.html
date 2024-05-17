@@ -1,75 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- fontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- favIcons -->
+    <!-- prettier-ignore -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+    <!-- prettier-ignore -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+    <!-- prettier-ignore -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+    <!-- prettier-ignore -->
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
     <!-- Animate.JS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <title>Stock</title>
-</head>
+  </head>
 
-<body class="animate__animated animate__fadeIn animate__slow">
-
+  <body class="animate__animated animate__fadeIn animate__slow">
     <nav>
-        <div class="nav__container">
-            <div class="sideToggleOpen">
-                <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-            </div>
-
-            <div class="nav__heading">
-                <h1>Stock Management</h1>
-                <p>Overview of current ingredients</p>
-            </div>
-
-            <div class="nav__date">
-                <i data-lucide="calendar"></i>
-                <span id="currentDate"></span>
-            </div>
+      <div class="nav__container">
+        <div class="sideToggleOpen">
+          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
         </div>
 
+        <div class="nav__heading">
+          <h1>Stock Management</h1>
+          <p>Overview of current ingredients</p>
+        </div>
+
+        <div class="nav__date">
+          <i data-lucide="calendar"></i>
+          <span id="currentDate"></span>
+        </div>
+      </div>
     </nav>
 
-
-
-    <div class="sidePanel hidden animate__animated ">
-        <div class="sidePanel__header">
-            <h2>BakeTrack</h2>
-            <a href="#" class="sideToggleClose"> <i class="sidePanel__icon " data-lucide="chevrons-left"></i></a>
-
-        </div>
-        <a href="/Dashboard.html" class="sidePanel__Tabs "><i data-lucide="home"></i>Home</a>
-        <a href="/src/Stock.html" class="sidePanel__Tabs active"><i data-lucide="layers"></i>Stock</a>
-        <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
-        <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
-        <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
-        <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+    <div class="sidePanel hidden animate__animated">
+      <div class="sidePanel__header">
+        <h2>BakeTrack</h2>
+        <a href="#" class="sideToggleClose">
+          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
+        ></a>
+      </div>
+      <a href="/Dashboard.html" class="sidePanel__Tabs"
+        ><i data-lucide="home"></i>Home</a
+      >
+      <a href="/src/Stock.html" class="sidePanel__Tabs active"
+        ><i data-lucide="layers"></i>Stock</a
+      >
+      <a href="/src/ingredients.html" class="sidePanel__Tabs"
+        ><i data-lucide="shopping-basket"></i>Ingredients</a
+      >
+      <a href="/src/Product.html" class="sidePanel__Tabs"
+        ><i data-lucide="package"></i>Product</a
+      >
+      <a href="/src/Analytics.html" class="sidePanel__Tabs"
+        ><i data-lucide="line-chart"></i>Analytics</a
+      >
+      <a href="/src/Finances.html" class="sidePanel__Tabs"
+        ><i data-lucide="hand-coins"></i>Finances</a
+      >
     </div>
 
     <div class="dashboard__container">
+      <div class="sub__Header">
+        <input id="stockSearch" type="text" placeholder="Search Items..." />
+        <button class="btn addNewItemBtn">Add New Item</button>
+      </div>
 
-        <div class="card__sml">
+      <div
+        class="Form addItemModal hidden animate__animated animate__slideInUp"
+      >
+        <h1>Add New Item</h1>
+        <p>Enter details of the item</p>
+        <form id="addItemForm">
+          <label for="name">Name:</label>
+          <!-- prettier-ignore -->
+          <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
 
+          <label for="Quantity">Quantity:</label>
+          <!-- prettier-ignore -->
+          <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
+
+          <label for="UnitOfMeasurement">Unit Of Measurement:</label>
+          <!-- prettier-ignore -->
+          <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
+
+          <label for="expirydate">expirydate:</label>
+          <!-- prettier-ignore -->
+          <input type="date" id="expirydate" name="expirydate" required
+               /><br /><br />
+          <button class="btn" type="submit">Add Item</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card__details card_Heading">
+          <p>Name</p>
+          <p>Quantity</p>
+          <p>Unit</p>
+          <p>Expiry</p>
+          <p></p>
         </div>
+        <hr />
 
+        <div class="card__details">
+          <p>Rice</p>
+          <p>25</p>
+          <p>kg</p>
+          <p>2024-10-15</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+        <hr />
 
+        <div class="card__details">
+          <p>Ground Beef</p>
+          <p>30</p>
+          <p>kg</p>
+          <p>2024-06-5</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+        <hr />
 
+        <div class="card__details">
+          <p>Olive Oil</p>
+          <p>10</p>
+          <p>liters</p>
+          <p>2025-01-17</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+        <hr />
+
+        <div class="card__details">
+          <p>Feta Cheese</p>
+          <p>14</p>
+          <p>kg</p>
+          <p>2024-02-5</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+        <hr />
+
+        <div class="card__details">
+          <p>Tomatos</p>
+          <p>30</p>
+          <p>Cans</p>
+          <p>2024-12-12</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+        <hr />
+
+        <div class="card__details">
+          <p>Stickers</p>
+          <p>100</p>
+          <p>-</p>
+          <p>-</p>
+          <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+          </span>
+        </div>
+      </div>
     </div>
-
 
     <div class="overlay hidden"></div>
 
-
-    <script src="/src/script.js"></script>
+    <script src="script.js"></script>
     <!-- Lucid Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-        lucide.createIcons();
+      lucide.createIcons();
     </script>
 
+    <script>
+      const addItemModal = document.querySelector(".addItemModal");
+      const addNewItemBtn = document.querySelector(".addNewItemBtn");
+      //   const overlay = document.querySelector(".overlay");
 
+      addNewItemBtn.addEventListener("click", function () {
+        addItemModal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+      });
 
-</body>
+      overlay.addEventListener("click", function () {
+        addItemModal.classList.add("hidden");
+      });
 
+      //   Filtering the items --------------
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("stockSearch");
+        const items = document.querySelectorAll(".card__details");
+        const cardHeading = document.querySelector(".card_Heading");
+        const hrElements = document.querySelectorAll(".card hr");
+
+        searchInput.addEventListener("input", function () {
+          const searchTerm = searchInput.value.toLowerCase();
+          let visibleItems = 0;
+
+          items.forEach((item) => {
+            const itemName = item.querySelector("p").textContent.toLowerCase();
+            if (itemName.includes(searchTerm)) {
+              item.style.display = "";
+              visibleItems++;
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          // Show or hide hr elements based on visible items
+          hrElements.forEach((hr, index) => {
+            if (index < visibleItems) {
+              hr.style.display = "";
+            } else {
+              hr.style.display = "none";
+            }
+          });
+
+          // Ensure the cardHeading is always visible
+          cardHeading.style.display = visibleItems > 0 ? "" : "none";
+        });
+      });
+
+      //   Adding items to the form------------
+      const addItemForm = document.getElementById("addItemForm");
+      addItemForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const quantity = document.getElementById("Quantity").value;
+        const unit = document.getElementById("UnitOfMeasurement").value;
+        const expiryDate = document.getElementById("expirydate").value;
+
+        const newItem = document.createElement("div");
+        newItem.classList.add("card__details");
+        newItem.innerHTML = `
+            
+            <p>${name}</p>
+            <p>${quantity}</p>
+            <p>${unit}</p>
+            <p>${expiryDate}</p>
+            <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+            </span>
+          `;
+
+        const card = document.querySelector(".card");
+        const hr = document.createElement("hr");
+
+        card.appendChild(hr);
+        card.appendChild(newItem);
+        card.appendChild(hr);
+
+        // Clear the form
+        addItemForm.reset();
+
+        // Hide the modal
+        addItemModal.classList.add("hidden");
+        overlay.classList.add("hidden");
+      });
+    </script>
+  </body>
 </html>
