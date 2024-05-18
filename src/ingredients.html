@@ -1,86 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- favIcons -->
-    <!-- prettier-ignore -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-    <!-- prettier-ignore -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-    <!-- prettier-ignore -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-    <!-- prettier-ignore -->
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <title>Ingredients</title>
-  </head>
 
-  <body>
-    <nav>
-      <div class="nav__container">
-        <div class="sideToggleOpen">
-          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- favIcons -->
+  <!-- prettier-ignore -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <!-- prettier-ignore -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <!-- prettier-ignore -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <!-- prettier-ignore -->
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <title>Ingredients</title>
+</head>
 
-        <div class="nav__heading">
-          <h1>Ingredients</h1>
-          <p>Ingredients in each batch</p>
-        </div>
-
-        <div class="nav__date">
-          <i data-lucide="calendar"></i>
-          <span id="currentDate"></span>
-        </div>
+<body>
+  <nav>
+    <div class="nav__container">
+      <div class="sideToggleOpen">
+        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
       </div>
-    </nav>
 
-    <div class="sidePanel hidden animate__animated">
-      <div class="sidePanel__header">
-        <h2>BakeTrack</h2>
-        <a href="#" class="sideToggleClose">
-          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
-        ></a>
+      <div class="nav__heading">
+        <h1>Ingredients</h1>
+        <p>Ingredients in each batch</p>
       </div>
-      <a href="/Dashboard.html" class="sidePanel__Tabs"
-        ><i data-lucide="home"></i>Home</a
-      >
-      <a href="/src/Stock.html" class="sidePanel__Tabs"
-        ><i data-lucide="layers"></i>Stock</a
-      >
-      <a href="/src/ingredients.html" class="sidePanel__Tabs active"
-        ><i data-lucide="shopping-basket"></i>Ingredients</a
-      >
-      <a href="/src/Product.html" class="sidePanel__Tabs"
-        ><i data-lucide="package"></i>Product</a
-      >
-      <a href="/src/Analytics.html" class="sidePanel__Tabs"
-        ><i data-lucide="line-chart"></i>Analytics</a
-      >
-      <a href="/src/Finances.html" class="sidePanel__Tabs"
-        ><i data-lucide="hand-coins"></i>Finances</a
-      >
+
+      <div class="nav__date">
+        <i data-lucide="calendar"></i>
+        <span id="currentDate"></span>
+      </div>
     </div>
+  </nav>
 
-    <div class="dashboard__container"></div>
+  <div class="sidePanel hidden animate__animated">
+    <div class="sidePanel__header">
+      <h2>BakeTrack</h2>
+      <a href="#" class="sideToggleClose">
+        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
+    </div>
+    <a href="/Dashboard.html" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
+    <a href="/src/Stock.html" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
+    <a href="/src/ingredients.html" class="sidePanel__Tabs active"><i data-lucide="shopping-basket"></i>Ingredients</a>
+    <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+    <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
+    <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+  </div>
 
-    <div class="overlay hidden"></div>
+  <div class="dashboard__container">
 
-    <script src="/src/script.js"></script>
-    <!-- Lucid Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+    <div class="card">
+
+      <div class="card__details card_Heading">
+        <p>Product</p>
+        <p>Ingredient</p>
+        <p></p>
+        <button class="btn__light">Add Batch</button>
+      </div>
+      <hr />
+
+      <div class="card__details">
+        <p>Banana</p>
+        <p>
+          <span>
+            Cake Flour, <br>
+            Corn Flour, <br>
+            Sugar,<br>
+            Margarine,<br>
+            Flavoring,<br>
+            Banana Paste,<br>
+          </span>
+        </p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
+
+      <div class="card__details">
+        <p>Chocolate & Vanilla</p>
+        <p>
+          <span>
+            Cake flour,<br>
+            Corn Flour,<br>
+            Sugar,<br>
+            Margarine,<br>
+            Flavoring,<br>
+            Milk,<br>
+            Coca,<br>
+            Vanilla,<br>
+          </span>
+        </p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
+
+      <div class="card__details">
+        <p>Chocolate</p>
+        <p>
+          <span>
+            Cake flour,<br>
+            Corn Flour,<br>
+            Sugar,<br>
+            Margarine,<br>
+            Flavoring,<br>
+            Coco Powder,<br>
+            Chocchip
+          </span>
+        </p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
+
+      <div class="card__details">
+        <p>Ginger Honey</p>
+        <p>
+          <span>
+            Cake flour,<br>
+            Corn Flour,<br>
+            Sugar,<br>
+            Margarine,<br>
+            Flavoring,<br>
+            Ginger Powder,<br>
+            Honey<br>
+          </span>
+        </p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
+
+
+
+
+    </div>
+  </div>
+
+  <div class="overlay hidden"></div>
+
+  <script src="/src/script.js"></script>
+  <!-- Lucid Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
 </html>

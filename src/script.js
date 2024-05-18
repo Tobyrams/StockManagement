@@ -25,7 +25,9 @@ toggeClose.addEventListener("click", function () {
 });
 
 overlay.addEventListener("click", function () {
-  sidePanel.classList.add("hidden");
+  if (!sidePanel.classList.contains("hidden")) {
+    sidePanel.classList.remove("hidden");
+  }
   removeAnimation();
   sidePanel.classList.add("animate__slideOutLeft");
   overlay.classList.add("hidden");
@@ -55,84 +57,94 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-// Event listener for mouse button down event on the slider
-slider.addEventListener("mousedown", (e) => {
-  // Set "isDown" flag to true to indicate mouse button is down
-  isDown = true;
-  // Calculate the initial position of the mouse pointer relative to the slider
-  startX = e.pageX - slider.offsetLeft;
-  // Store the initial scroll position of the slider
-  scrollLeft = slider.scrollLeft;
-});
-// Event listener for mouse leaving the slider area
-slider.addEventListener("mouseleave", () => {
-  // Reset the "isDown" flag to false when mouse leaves the slider area
-  isDown = false;
-});
-// Event listener for mouse button up event on the slider
-slider.addEventListener("mouseup", () => {
-  // Reset the "isDown" flag to false when mouse button is released
-  isDown = false;
-});
-// Event listener for mouse movement over the slider
-slider.addEventListener("mousemove", (e) => {
-  // Check if mouse button is not down, exit the function
-  if (!isDown) return;
-  // Prevent default behavior of mousemove event (e.g., text selection)
-  e.preventDefault();
-  // Calculate the new position of the mouse pointer relative to the slider
-  const x = e.pageX - slider.offsetLeft;
-  // Calculate the distance moved by the mouse pointer from the initial position
-  const walk = x - startX;
-  // Update the scroll position of the slider by subtracting the distance moved
-  slider.scrollLeft = scrollLeft - walk;
-});
+//Cheks if el exists to not thorw an error
+if (slider) {
+  // Event listener for mouse button down event on the slider
+  slider.addEventListener("mousedown", (e) => {
+    // Set "isDown" flag to true to indicate mouse button is down
+    isDown = true;
+    // Calculate the initial position of the mouse pointer relative to the slider
+    startX = e.pageX - slider.offsetLeft;
+    // Store the initial scroll position of the slider
+    scrollLeft = slider.scrollLeft;
+  });
+
+  // Event listener for mouse leaving the slider area
+  slider.addEventListener("mouseleave", () => {
+    // Reset the "isDown" flag to false when mouse leaves the slider area
+    isDown = false;
+  });
+  // Event listener for mouse button up event on the slider
+  slider.addEventListener("mouseup", () => {
+    // Reset the "isDown" flag to false when mouse button is released
+    isDown = false;
+  });
+  // Event listener for mouse movement over the slider
+  slider.addEventListener("mousemove", (e) => {
+    // Check if mouse button is not down, exit the function
+    if (!isDown) return;
+    // Prevent default behavior of mousemove event (e.g., text selection)
+    e.preventDefault();
+    // Calculate the new position of the mouse pointer relative to the slider
+    const x = e.pageX - slider.offsetLeft;
+    // Calculate the distance moved by the mouse pointer from the initial position
+    const walk = x - startX;
+    // Update the scroll position of the slider by subtracting the distance moved
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
 
 // --------------------- FILTER ------------------
 
 // Get the input field, all card elements, and create a container for the message
 const filterInput = document.getElementById("filterInput");
 const cards = document.querySelectorAll(".card__lg");
+const lgCard = document.querySelector(".lg__cards");
 const messageContainer = document.createElement("div");
+
 messageContainer.classList.add("message");
-document.querySelector(".lg__cards").appendChild(messageContainer); // Append the message container to the cards container
+if (lgCard) {
+  lgCard.appendChild(messageContainer); // Append the message container to the cards container
+}
 
-// Add an event listener to the input field for input events (when user types)
-filterInput.addEventListener("input", function () {
-  const filterText = this.value.toLowerCase();
-  let foundMatch = false; // Flag to track if a match is found
+if (filterInput) {
+  // Add an event listener to the input field for input events (when user types)
+  filterInput.addEventListener("input", function () {
+    const filterText = this.value.toLowerCase();
+    let foundMatch = false; // Flag to track if a match is found
 
-  // Loop through each card element
-  cards.forEach((card) => {
-    const title = card.querySelector("h2").textContent.toLowerCase();
+    // Loop through each card element
+    cards.forEach((card) => {
+      const title = card.querySelector("h2").textContent.toLowerCase();
 
-    // Check if the title text of the card includes the filter text
-    if (title.includes(filterText)) {
-      card.style.display = "block"; // Show the card if there's a match
-      foundMatch = true; // Set flag to true if a match is found
+      // Check if the title text of the card includes the filter text
+      if (title.includes(filterText)) {
+        card.style.display = "block"; // Show the card if there's a match
+        foundMatch = true; // Set flag to true if a match is found
+      } else {
+        card.style.display = "none"; // Hide the card if there's no match
+      }
+    });
+
+    // Display message if no match is found
+    if (!foundMatch) {
+      messageContainer.textContent = "No matching results found."; // Set the message content
+      messageContainer.style.display = "flex";
+      messageContainer.style.height = "75vh";
+      messageContainer.style.width = "100vw";
+      messageContainer.style.fontWeight = "400";
+      messageContainer.style.fontSize = "3rem";
+      messageContainer.style.color = "red";
+      messageContainer.style.marginTop = "10px";
+      messageContainer.style.flexDirection = "column";
+      messageContainer.style.justifyContent = "center";
+      messageContainer.style.alignItems = "center";
     } else {
-      card.style.display = "none"; // Hide the card if there's no match
+      messageContainer.textContent = ""; // Clear the message if a match is found
+      messageContainer.style.display = "none"; // Hide the message container
     }
   });
-
-  // Display message if no match is found
-  if (!foundMatch) {
-    messageContainer.textContent = "No matching results found."; // Set the message content
-    messageContainer.style.display = "flex";
-    messageContainer.style.height = "75vh";
-    messageContainer.style.width = "100vw";
-    messageContainer.style.fontWeight = "400";
-    messageContainer.style.fontSize = "3rem";
-    messageContainer.style.color = "red";
-    messageContainer.style.marginTop = "10px";
-    messageContainer.style.flexDirection = "column";
-    messageContainer.style.justifyContent = "center";
-    messageContainer.style.alignItems = "center";
-  } else {
-    messageContainer.textContent = ""; // Clear the message if a match is found
-    messageContainer.style.display = "none"; // Hide the message container
-  }
-});
+}
 
 // const addItemModal = document.querySelector(".addItemModal");
 // const addNewItemBtn = document.querySelector(".addNewItemBtn");
@@ -142,3 +154,137 @@ filterInput.addEventListener("input", function () {
 //   overlay.classList.remove("hidden");
 //   console.log("clicked");
 // });
+
+// Stock Management Page
+const addItemModal = document.querySelector(".addItemModal");
+const editItemModal = document.querySelector(".editItemModal");
+const addNewItemBtn = document.querySelector(".addNewItemBtn");
+//   const overlay = document.querySelector(".overlay");
+if (addNewItemBtn) {
+  addNewItemBtn.addEventListener("click", function () {
+    addItemForm.reset(); //Resets the form
+    addItemModal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  });
+}
+
+overlay.addEventListener("click", function () {
+  if (addItemModal || editItemModal) {
+    addItemModal.classList.add("hidden");
+    editItemModal.classList.add("hidden");
+  }
+});
+
+//   Filtering the items --------------
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("stockSearch");
+  const items = document.querySelectorAll(".card__details");
+  const cardHeading = document.querySelector(".card_Heading");
+  const hrElements = document.querySelectorAll(".card hr");
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const searchTerm = searchInput.value.toLowerCase();
+      let visibleItems = 0;
+
+      items.forEach((item) => {
+        const itemName = item.querySelector("p").textContent.toLowerCase();
+        if (itemName.includes(searchTerm)) {
+          item.style.display = "";
+          visibleItems++;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      // Show or hide hr elements based on visible items
+      hrElements.forEach((hr, index) => {
+        if (index < visibleItems) {
+          hr.style.display = "";
+        } else {
+          hr.style.display = "none";
+        }
+      });
+
+      // Ensure the cardHeading is always visible
+      cardHeading.style.display = visibleItems > 0 ? "" : "none";
+    });
+  }
+});
+
+//   Adding items to the form------------
+const addItemForm = document.getElementById("addItemForm");
+if (addItemForm) {
+  addItemForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const quantity = document.getElementById("Quantity").value;
+    const unit = document.getElementById("UnitOfMeasurement").value;
+    const expiryDate = document.getElementById("expirydate").value;
+
+    const newItem = document.createElement("div");
+    newItem.classList.add("card__details");
+    newItem.innerHTML = `
+            
+            <p>${name}</p>
+            <p>${quantity}</p>
+            <p>${unit}</p>
+            <p>${expiryDate}</p>
+            <span>
+            <i class="fa-regular fa-pen-to-square card__Btn"></i>
+            <i class="fa-regular fa-trash-can card__Btn"></i>
+            </span>
+          `;
+
+    const card = document.querySelector(".card");
+    const hr = document.createElement("hr");
+
+    card.appendChild(hr);
+    card.appendChild(newItem);
+    card.appendChild(hr);
+
+    // Clear the form
+    addItemForm.reset();
+
+    // Hide the modal
+    addItemModal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  });
+}
+
+//   function to remove the item from the list when trash button is clicked
+const card = document.querySelector(".card");
+if (card) {
+  card.addEventListener("click", (event) => {
+    if (event.target.classList.contains("fa-trash-can")) {
+      const cardDetails = event.target.closest(".card__details");
+      const hr = cardDetails.nextElementSibling;
+      cardDetails.remove();
+      hr.remove();
+    }
+  });
+
+  //function for the edit button
+  card.addEventListener("click", (event) => {
+    if (event.target.classList.contains("fa-pen-to-square")) {
+      const cardDetails = event.target.closest(".card__details");
+      const hr = cardDetails.nextElementSibling;
+
+      // Get the values from the card details
+      const name = cardDetails.children[0].textContent;
+      const quantity = cardDetails.children[1].textContent;
+      const unit = cardDetails.children[2].textContent;
+      const expiryDate = cardDetails.children[3].textContent;
+
+      // Fill the form with the values
+      document.getElementById("editname").value = name;
+      document.getElementById("editQuantity").value = quantity;
+      document.getElementById("editUnitOfMeasurement").value = unit;
+      document.getElementById("editexpirydate").value = expiryDate;
+
+      // Show the modal
+      editItemModal.classList.remove("hidden");
+      overlay.classList.remove("hidden");
+    }
+  });
+}

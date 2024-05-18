@@ -1,355 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- fontAwesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- favIcons -->
-    <!-- prettier-ignore -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-    <!-- prettier-ignore -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-    <!-- prettier-ignore -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-    <!-- prettier-ignore -->
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <title>Stock</title>
-  </head>
 
-  <body class="animate__animated animate__fadeIn animate__slow">
-    <nav>
-      <div class="nav__container">
-        <div class="sideToggleOpen">
-          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- favIcons -->
+  <!-- prettier-ignore -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <!-- prettier-ignore -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <!-- prettier-ignore -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <!-- prettier-ignore -->
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <title>Stock</title>
+</head>
 
-        <div class="nav__heading">
-          <h1>Stock Management</h1>
-          <p>Overview of current ingredients</p>
-        </div>
-
-        <div class="nav__date">
-          <i data-lucide="calendar"></i>
-          <span id="currentDate"></span>
-        </div>
-      </div>
-    </nav>
-
-    <div class="sidePanel hidden animate__animated">
-      <div class="sidePanel__header">
-        <h2>BakeTrack</h2>
-        <a href="#" class="sideToggleClose">
-          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
-        ></a>
-      </div>
-      <a href="/Dashboard.html" class="sidePanel__Tabs"
-        ><i data-lucide="home"></i>Home</a
-      >
-      <a href="/src/Stock.html" class="sidePanel__Tabs active"
-        ><i data-lucide="layers"></i>Stock</a
-      >
-      <a href="/src/ingredients.html" class="sidePanel__Tabs"
-        ><i data-lucide="shopping-basket"></i>Ingredients</a
-      >
-      <a href="/src/Product.html" class="sidePanel__Tabs"
-        ><i data-lucide="package"></i>Product</a
-      >
-      <a href="/src/Analytics.html" class="sidePanel__Tabs"
-        ><i data-lucide="line-chart"></i>Analytics</a
-      >
-      <a href="/src/Finances.html" class="sidePanel__Tabs"
-        ><i data-lucide="hand-coins"></i>Finances</a
-      >
-    </div>
-
-    <div class="dashboard__container">
-      <div class="sub__Header">
-        <input id="stockSearch" type="text" placeholder="Search Items..." />
-        <button class="btn addNewItemBtn">Add New Item</button>
+<body class="animate__animated animate__fadeIn animate__slow">
+  <nav>
+    <div class="nav__container">
+      <div class="sideToggleOpen">
+        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
       </div>
 
-      <!-- prettier-ignore -->
-      <div class="Form addItemModal hidden animate__animated animate__slideInUp">
-            <h1>Add New Item</h1>
-            <p>Enter details of the item</p>
-            <form id="addItemForm">
-            <label for="name">Name:</label>
-            <!-- prettier-ignore -->
-            <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
-
-            <label for="Quantity">Quantity:</label>
-            <!-- prettier-ignore -->
-            <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
-
-            <label for="UnitOfMeasurement">Unit Of Measurement:</label>
-            <!-- prettier-ignore -->
-            <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
-
-            <label for="expirydate">expirydate:</label>
-            <!-- prettier-ignore -->
-            <input type="date" id="expirydate" name="expirydate" required
-                /><br /><br />
-            <button class="btn" type="submit">Add Item</button>
-            </form>
+      <div class="nav__heading">
+        <h1>Stock Management</h1>
+        <p>Overview of current ingredients</p>
       </div>
 
-      <div
-        class="Form editItemModal hidden animate__animated animate__slideInUp"
-      >
-        <h1>Edit Item</h1>
-        <p>Edit the details of the selected Item</p>
-        <form id="editItemForm">
-          <label for="name">Name:</label>
-          <!-- prettier-ignore -->
-          <input type="text" id="editname" name="name" required placeholder="Enter product name" /><br />
-
-          <label for="Quantity">Quantity:</label>
-          <!-- prettier-ignore -->
-          <input type="number" id="editQuantity" name="Quantity" required placeholder="Enter the quantity" /><br />
-
-          <label for="UnitOfMeasurement">Unit Of Measurement:</label>
-          <!-- prettier-ignore -->
-          <input type="text" id="editUnitOfMeasurement" name="UnitOfMeasurement" required placeholder="Enter the unit e.g. kg" /><br />
-
-          <label for="expirydate">expirydate:</label>
-          <!-- prettier-ignore -->
-          <input type="date" id="editexpirydate" name="expirydate" required
-            /><br /><br />
-          <button class="btn" type="submit">Edit Item</button>
-        </form>
-      </div>
-
-      <div class="card">
-        <div class="card__details card_Heading">
-          <p>Name</p>
-          <p>Quantity</p>
-          <p>Unit</p>
-          <p>Expiry</p>
-          <p></p>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Rice</p>
-          <p>25</p>
-          <p>kg</p>
-          <p>2024-10-15</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Ground Beef</p>
-          <p>30</p>
-          <p>kg</p>
-          <p>2024-06-05</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Olive Oil</p>
-          <p>10</p>
-          <p>liters</p>
-          <p>2025-01-17</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Feta Cheese</p>
-          <p>14</p>
-          <p>kg</p>
-          <p>2024-02-05</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Tomatos</p>
-          <p>30</p>
-          <p>Cans</p>
-          <p>2024-12-12</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Stickers</p>
-          <p>100</p>
-          <p>-</p>
-          <p>-</p>
-          <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-          </span>
-        </div>
-        <hr />
+      <div class="nav__date">
+        <i data-lucide="calendar"></i>
+        <span id="currentDate"></span>
       </div>
     </div>
+  </nav>
 
-    <div class="overlay hidden"></div>
+  <div class="sidePanel hidden animate__animated">
+    <div class="sidePanel__header">
+      <h2>BakeTrack</h2>
+      <a href="#" class="sideToggleClose">
+        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
+    </div>
+    <a href="/Dashboard.html" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
+    <a href="/src/Stock.html" class="sidePanel__Tabs active"><i data-lucide="layers"></i>Stock</a>
+    <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
+    <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+    <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
+    <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+  </div>
 
-    <script src="script.js"></script>
-    <!-- Lucid Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-      lucide.createIcons();
-    </script>
+  <div class="dashboard__container">
+    <div class="sub__Header">
+      <input id="stockSearch" type="text" placeholder="Search Items..." />
+      <button class="btn addNewItemBtn">Add New Item</button>
+    </div>
 
-    <script>
-      const addItemModal = document.querySelector(".addItemModal");
-      const editItemModal = document.querySelector(".editItemModal");
-      const addNewItemBtn = document.querySelector(".addNewItemBtn");
-      //   const overlay = document.querySelector(".overlay");
+    <!-- prettier-ignore -->
+    <div class="Form addItemModal hidden animate__animated animate__slideInUp">
+      <h1>Add New Item</h1>
+      <p>Enter details of the item</p>
+      <form id="addItemForm">
+        <label for="name">Name:</label>
+        <!-- prettier-ignore -->
+        <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
 
-      addNewItemBtn.addEventListener("click", function () {
-        addItemForm.reset(); //Resets the form
-        addItemModal.classList.remove("hidden");
-        overlay.classList.remove("hidden");
-      });
+        <label for="Quantity">Quantity:</label>
+        <!-- prettier-ignore -->
+        <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
 
-      overlay.addEventListener("click", function () {
-        addItemModal.classList.add("hidden");
-        editItemModal.classList.add("hidden");
-      });
+        <label for="UnitOfMeasurement">Unit Of Measurement:</label>
+        <!-- prettier-ignore -->
+        <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required
+          placeholder="Enter the unit e.g. kg" /><br />
 
-      //   Filtering the items --------------
-      document.addEventListener("DOMContentLoaded", function () {
-        const searchInput = document.getElementById("stockSearch");
-        const items = document.querySelectorAll(".card__details");
-        const cardHeading = document.querySelector(".card_Heading");
-        const hrElements = document.querySelectorAll(".card hr");
+        <label for="expirydate">expirydate:</label>
+        <!-- prettier-ignore -->
+        <input type="date" id="expirydate" name="expirydate" required /><br /><br />
+        <button class="btn" type="submit">Add Item</button>
+      </form>
+    </div>
 
-        searchInput.addEventListener("input", function () {
-          const searchTerm = searchInput.value.toLowerCase();
-          let visibleItems = 0;
+    <div class="Form editItemModal hidden animate__animated animate__slideInUp">
+      <h1>Edit Item</h1>
+      <p>Edit the details of the selected Item</p>
+      <form id="editItemForm">
+        <label for="name">Name:</label>
+        <!-- prettier-ignore -->
+        <input type="text" id="editname" name="name" required placeholder="Enter product name" /><br />
 
-          items.forEach((item) => {
-            const itemName = item.querySelector("p").textContent.toLowerCase();
-            if (itemName.includes(searchTerm)) {
-              item.style.display = "";
-              visibleItems++;
-            } else {
-              item.style.display = "none";
-            }
-          });
+        <label for="Quantity">Quantity:</label>
+        <!-- prettier-ignore -->
+        <input type="number" id="editQuantity" name="Quantity" required placeholder="Enter the quantity" /><br />
 
-          // Show or hide hr elements based on visible items
-          hrElements.forEach((hr, index) => {
-            if (index < visibleItems) {
-              hr.style.display = "";
-            } else {
-              hr.style.display = "none";
-            }
-          });
+        <label for="UnitOfMeasurement">Unit Of Measurement:</label>
+        <!-- prettier-ignore -->
+        <input type="text" id="editUnitOfMeasurement" name="UnitOfMeasurement" required
+          placeholder="Enter the unit e.g. kg" /><br />
 
-          // Ensure the cardHeading is always visible
-          cardHeading.style.display = visibleItems > 0 ? "" : "none";
-        });
-      });
+        <label for="expirydate">expirydate:</label>
+        <!-- prettier-ignore -->
+        <input type="date" id="editexpirydate" name="expirydate" required /><br /><br />
+        <button class="btn" type="submit">Edit Item</button>
+      </form>
+    </div>
 
-      //   Adding items to the form------------
-      const addItemForm = document.getElementById("addItemForm");
-      addItemForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+    <div class="card">
+      <div class="card__details card_Heading">
+        <p>Name</p>
+        <p>Quantity</p>
+        <p>Unit</p>
+        <p>Expiry</p>
+        <p></p>
+      </div>
+      <hr />
 
-        const name = document.getElementById("name").value;
-        const quantity = document.getElementById("Quantity").value;
-        const unit = document.getElementById("UnitOfMeasurement").value;
-        const expiryDate = document.getElementById("expirydate").value;
+      <div class="card__details">
+        <p>Rice</p>
+        <p>25</p>
+        <p>kg</p>
+        <p>2024-10-15</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
 
-        const newItem = document.createElement("div");
-        newItem.classList.add("card__details");
-        newItem.innerHTML = `
-            
-            <p>${name}</p>
-            <p>${quantity}</p>
-            <p>${unit}</p>
-            <p>${expiryDate}</p>
-            <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-            </span>
-          `;
+      <div class="card__details">
+        <p>Ground Beef</p>
+        <p>30</p>
+        <p>kg</p>
+        <p>2024-06-05</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
 
-        const card = document.querySelector(".card");
-        const hr = document.createElement("hr");
+      <div class="card__details">
+        <p>Olive Oil</p>
+        <p>10</p>
+        <p>liters</p>
+        <p>2025-01-17</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
 
-        card.appendChild(hr);
-        card.appendChild(newItem);
-        card.appendChild(hr);
+      <div class="card__details">
+        <p>Feta Cheese</p>
+        <p>14</p>
+        <p>kg</p>
+        <p>2024-02-05</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
 
-        // Clear the form
-        addItemForm.reset();
+      <div class="card__details">
+        <p>Tomatos</p>
+        <p>30</p>
+        <p>Cans</p>
+        <p>2024-12-12</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
 
-        // Hide the modal
-        addItemModal.classList.add("hidden");
-        overlay.classList.add("hidden");
-      });
+      <div class="card__details">
+        <p>Stickers</p>
+        <p>100</p>
+        <p>-</p>
+        <p>-</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn"></i>
+          <i class="fa-regular fa-trash-can card__Btn"></i>
+        </span>
+      </div>
+      <hr />
+    </div>
+  </div>
 
-      //   function to remove the item from the list when trash button is clicked
-      const card = document.querySelector(".card");
-      card.addEventListener("click", (event) => {
-        if (event.target.classList.contains("fa-trash-can")) {
-          const cardDetails = event.target.closest(".card__details");
-          const hr = cardDetails.nextElementSibling;
-          cardDetails.remove();
-          hr.remove();
-        }
-      });
+  <div class="overlay hidden"></div>
 
-      //function for the edit button
-      card.addEventListener("click", (event) => {
-        if (event.target.classList.contains("fa-pen-to-square")) {
-          const cardDetails = event.target.closest(".card__details");
-          const hr = cardDetails.nextElementSibling;
+  <script src="script.js"></script>
+  <!-- Lucid Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
 
-          // Get the values from the card details
-          const name = cardDetails.children[0].textContent;
-          const quantity = cardDetails.children[1].textContent;
-          const unit = cardDetails.children[2].textContent;
-          const expiryDate = cardDetails.children[3].textContent;
 
-          // Fill the form with the values
-          document.getElementById("editname").value = name;
-          document.getElementById("editQuantity").value = quantity;
-          document.getElementById("editUnitOfMeasurement").value = unit;
-          document.getElementById("editexpirydate").value = expiryDate;
+</body>
 
-          // Show the modal
-          editItemModal.classList.remove("hidden");
-          overlay.classList.remove("hidden");
-        }
-      });
-    </script>
-  </body>
 </html>

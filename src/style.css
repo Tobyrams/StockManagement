@@ -18,6 +18,8 @@ body {
   z-index: 1;
   font-family: "poppins", sans-serif;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .auth-container {
@@ -124,12 +126,28 @@ body {
   }
 }
 
+.btn__light {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 0.5rem;
+  transition: background-color 0.3s linear;
+  font-family: "poppins", sans-serif;
+
+  &:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
+}
+
 /* NAVS */
 
 .nav__container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   /* flex-wrap: wrap; */
   padding: 1rem;
@@ -178,6 +196,7 @@ body {
     .nav__heading {
       display: flex;
       justify-content: center;
+      align-items: flex-end;
       width: 100%;
     }
     .nav__date {
@@ -357,7 +376,19 @@ body {
   color: rgba(0, 0, 0, 0.5);
   font-weight: 600;
 }
+
 .sideToggleOpen {
+  position: fixed;
+  z-index: 5;
+  background-color: white;
+  border-radius: 50%;
+  top: 1%;
+  left: 2%;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+
   .sidePanel__icon {
     height: 3rem;
     width: 3rem;
@@ -372,7 +403,7 @@ body {
   display: flex;
   flex-direction: column;
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 210px;
