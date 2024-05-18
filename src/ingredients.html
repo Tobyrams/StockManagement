@@ -22,6 +22,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- Animate.JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- SweetAlert2  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
   <title>Ingredients</title>
 </head>
 
@@ -60,13 +63,39 @@
 
   <div class="dashboard__container">
 
+
+    <div class="Form addBatchModal hidden animate__animated animate__fadeInUp animate__fast">
+      <h1>Add New Batch</h1>
+      <p>Check ingredients to include in the new batch</p>
+
+      <form id="addIngredientForm">
+        <label for="ingredient">Ingredient Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter ingredient name" /><br />
+
+        <label for="IngredientUOM">Unit Of Measurement:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter ingredient name" /><br />
+        <button class="btn" type="submit">Add New Ingredient</button>
+      </form>
+
+      <form id="addBatchForm">
+        <div class="batchIngredientItem">
+          <input type="checkbox" id="ingCheck">
+          <label for="">Cake Flour</label>
+          <span class="ingUOM">g</span>
+          <input type="number" id="ingQty">
+        </div>
+
+        <button class="btn" type="submit">Add New Batch</button>
+      </form>
+    </div>
+
     <div class="card">
 
       <div class="card__details card_Heading">
         <p>Product</p>
         <p>Ingredient</p>
         <p></p>
-        <button class="btn__light">Add Batch</button>
+        <button class="btn__light addBatchBtn">Add Batch</button>
       </div>
       <hr />
 
@@ -158,12 +187,15 @@
 
   <div class="overlay hidden"></div>
 
-  <script src="/src/script.js"></script>
+  <script type="module" src="/src/script.js"></script>
   <!-- Lucid Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
   </script>
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>

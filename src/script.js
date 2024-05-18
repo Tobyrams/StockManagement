@@ -30,7 +30,7 @@ overlay.addEventListener("click", function () {
   }
   removeAnimation();
   sidePanel.classList.add("animate__slideOutLeft");
-  overlay.classList.add("hidden");
+  // overlay.classList.add("hidden");
 });
 
 // Dashboard date
@@ -146,34 +146,99 @@ if (filterInput) {
   });
 }
 
-// const addItemModal = document.querySelector(".addItemModal");
-// const addNewItemBtn = document.querySelector(".addNewItemBtn");
-
-// addNewItemBtn.addEventListener("click", function () {
-//   addItemModal.classList.remove("hidden");
-//   overlay.classList.remove("hidden");
-//   console.log("clicked");
-// });
-
 // Stock Management Page
+
+//Modals
 const addItemModal = document.querySelector(".addItemModal");
 const editItemModal = document.querySelector(".editItemModal");
+const addBatchModal = document.querySelector(".addBatchModal");
+//Btns
 const addNewItemBtn = document.querySelector(".addNewItemBtn");
-//   const overlay = document.querySelector(".overlay");
-if (addNewItemBtn) {
-  addNewItemBtn.addEventListener("click", function () {
-    addItemForm.reset(); //Resets the form
-    addItemModal.classList.remove("hidden");
+const addBatchBtn = document.querySelector(".addBatchBtn");
+
+//forms
+const addBatchForm = document.getElementById("addBatchForm");
+const addItemForm = document.getElementById("addItemForm");
+const editItemForm = document.getElementById("editItemForm");
+
+// Btn event listeners ------------------------------
+
+function addModal(btn, form, modal) {
+  btn.addEventListener("click", function () {
+    form.reset(); // Resets the form
+    modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
   });
 }
 
+if (addNewItemBtn) {
+  addModal(addNewItemBtn, addItemForm, addItemModal);
+}
+
+if (addBatchBtn) {
+  addModal(addBatchBtn, addBatchForm, addBatchModal);
+}
+
+/**
+ * Handles the animation for hiding a modal element.
+ * @param {*} modal The modal element to animate.
+ */
+const handleModalHideAnimation = (modal) => {
+  // Check if the modal currently has the 'animate__fadeInUp' class
+  if (modal.classList.contains("animate__fadeInUp")) {
+    // Remove 'animate__fadeInUp' and add 'animate__fadeOutDown' for hiding animation
+    modal.classList.remove("animate__fadeInUp");
+    modal.classList.add("animate__fadeOutDown");
+
+    // Hide the modal after the animation ends
+    setTimeout(() => {
+      modal.classList.add("hidden"); // Hide the modal
+      modal.classList.remove("animate__fadeOutDown"); // Reset animation class
+      modal.classList.add("animate__fadeInUp"); // Prepare for next appearance
+    }, 700);
+
+    // Hide the overlay slightly before the modal hide animation ends
+    setTimeout(() => {
+      overlay.classList.add("hidden"); // Hide the overlay
+    }, 650);
+  }
+};
+
 overlay.addEventListener("click", function () {
-  if (addItemModal || editItemModal) {
-    addItemModal.classList.add("hidden");
-    editItemModal.classList.add("hidden");
+  // Check if either modals exist
+  if (addItemModal || editItemModal || addBatchModal) {
+    // Handle animation for addItemModal if it exists
+
+    if (addItemModal) {
+      handleModalHideAnimation(addItemModal);
+    }
+
+    // Handle animation for editItemModal if it exists
+    if (editItemModal) {
+      handleModalHideAnimation(editItemModal);
+    }
+
+    // Handle animation for addBatchModal if it exists
+    if (addBatchModal) {
+      handleModalHideAnimation(addBatchModal);
+    }
   }
 });
+
+if (addBatchForm) {
+  addBatchForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleModalHideAnimation(addBatchModal);
+    comingSoon();
+  });
+}
+if (editItemForm) {
+  editItemForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleModalHideAnimation(editItemModal);
+    comingSoon();
+  });
+}
 
 //   Filtering the items --------------
 document.addEventListener("DOMContentLoaded", function () {
@@ -212,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //   Adding items to the form------------
-const addItemForm = document.getElementById("addItemForm");
+
 if (addItemForm) {
   addItemForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -286,5 +351,14 @@ if (card) {
       editItemModal.classList.remove("hidden");
       overlay.classList.remove("hidden");
     }
+  });
+}
+
+function comingSoon() {
+  Swal.fire({
+    icon: "question",
+    title: "Coming Soon!",
+    showConfirmButton: false,
+    timer: 1500,
   });
 }

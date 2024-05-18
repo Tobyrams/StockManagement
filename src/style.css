@@ -379,7 +379,7 @@ body {
 
 .sideToggleOpen {
   position: fixed;
-  z-index: 5;
+  z-index: 1;
   background-color: white;
   border-radius: 50%;
   top: 1%;
@@ -485,5 +485,30 @@ body {
     border: 1px solid rgb(0, 0, 0, 0.2);
     border-radius: 3px;
     padding: 0 0 0 5px;
+  }
+}
+
+/* Ingredients Page */
+
+.batchIngredientItem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  .ingUOM {
+    display: flex;
+    justify-content: center;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+  }
+  #ingQty {
+    width: 50px;
+  }
+  #ingCheck {
+    width: 20px;
+    border: 2px solid rgb(0, 0, 0, 0.1);
   }
 }

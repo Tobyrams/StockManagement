@@ -20,6 +20,9 @@
   <link rel="manifest" href="/favicon_io/site.webmanifest" />
   <!-- Animate.JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- SweetAlert2  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
   <title>Stock</title>
 </head>
 
@@ -63,7 +66,7 @@
     </div>
 
     <!-- prettier-ignore -->
-    <div class="Form addItemModal hidden animate__animated animate__slideInUp">
+    <div class="Form addItemModal hidden animate__animated animate__fadeInUp animate__fast">
       <h1>Add New Item</h1>
       <p>Enter details of the item</p>
       <form id="addItemForm">
@@ -87,7 +90,7 @@
       </form>
     </div>
 
-    <div class="Form editItemModal hidden animate__animated animate__slideInUp">
+    <div class="Form editItemModal hidden animate__animated animate__fadeInUp animate__fast">
       <h1>Edit Item</h1>
       <p>Edit the details of the selected Item</p>
       <form id="editItemForm">
@@ -203,7 +206,8 @@
   <script>
     lucide.createIcons();
   </script>
-
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
