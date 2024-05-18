@@ -152,14 +152,17 @@ if (filterInput) {
 const addItemModal = document.querySelector(".addItemModal");
 const editItemModal = document.querySelector(".editItemModal");
 const addBatchModal = document.querySelector(".addBatchModal");
+const addProductModal = document.querySelector(".addProductModal");
 //Btns
 const addNewItemBtn = document.querySelector(".addNewItemBtn");
 const addBatchBtn = document.querySelector(".addBatchBtn");
+const addProductBtn = document.querySelector(".addProductBtn");
 
 //forms
 const addBatchForm = document.getElementById("addBatchForm");
 const addItemForm = document.getElementById("addItemForm");
 const editItemForm = document.getElementById("editItemForm");
+const addProductForm = document.getElementById("addProductForm");
 
 // Btn event listeners ------------------------------
 
@@ -177,6 +180,10 @@ if (addNewItemBtn) {
 
 if (addBatchBtn) {
   addModal(addBatchBtn, addBatchForm, addBatchModal);
+}
+
+if (addProductBtn) {
+  addModal(addProductBtn, addProductForm, addProductModal);
 }
 
 /**
@@ -206,7 +213,7 @@ const handleModalHideAnimation = (modal) => {
 
 overlay.addEventListener("click", function () {
   // Check if either modals exist
-  if (addItemModal || editItemModal || addBatchModal) {
+  if (addItemModal || editItemModal || addBatchModal || addProductModal) {
     // Handle animation for addItemModal if it exists
 
     if (addItemModal) {
@@ -222,7 +229,15 @@ overlay.addEventListener("click", function () {
     if (addBatchModal) {
       handleModalHideAnimation(addBatchModal);
     }
+    // Handle animation for addProductModal if it exists
+    if (addProductModal) {
+      handleModalHideAnimation(addProductModal);
+    }
   }
+
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+  }, 650);
 });
 
 if (addBatchForm) {
@@ -240,12 +255,21 @@ if (editItemForm) {
   });
 }
 
+if (addProductModal) {
+  addProductForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleModalHideAnimation(addProductModal);
+    comingSoon();
+  });
+}
+
 //   Filtering the items --------------
 document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("stockSearch");
   const items = document.querySelectorAll(".card__details");
   const cardHeading = document.querySelector(".card_Heading");
   const hrElements = document.querySelectorAll(".card hr");
+
   if (searchInput) {
     searchInput.addEventListener("input", function () {
       const searchTerm = searchInput.value.toLowerCase();
