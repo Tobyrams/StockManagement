@@ -129,6 +129,24 @@ body {
   }
 }
 
+.btndesView {
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem;
+  transition: background-color 0.3s linear;
+  font-family: "poppins", sans-serif;
+  transition: all 0.2s linear;
+
+  background-color: #c4c4c4;
+  color: black;
+  font-weight: 600;
+
+  &:hover {
+    background-color: var(--btn-color);
+    color: white;
+  }
+}
+
 .btn__light {
   background-color: white;
   color: black;
@@ -221,11 +239,13 @@ body {
 
   width: 100%;
   margin: 0 auto;
+
+  margin-bottom: 1rem;
 }
 
 .card__details {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   /* padding-top: 10px; */
   padding: 10px 0;
@@ -249,6 +269,24 @@ body {
   }
 }
 
+.card__expense__details {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.card__nav {
+  display: flex;
+  flex-direction: column;
+  line-height: 25px;
+
+  p {
+    font-size: 12px;
+    color: rgb(0, 0, 0, 0.5);
+    font-weight: 500;
+  }
+}
+
 @media (max-width: 576px) {
   /* Styles for extra small screens */
 
@@ -257,7 +295,7 @@ body {
   }
   .card__date {
     font-size: small;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     span {
       font-weight: 500;
     }
@@ -297,15 +335,24 @@ body {
 }
 
 .card__details p,
-.card__details span {
+.card__details span,
+.card__details button {
   flex: 1;
   text-align: center;
 }
 
-.card__details span {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+@media (max-width: 576px) {
+  .card__details p,
+  .card__details span,
+  .card__details button {
+    min-width: 55px;
+    font-size: 13px;
+  }
+  .card__details__Pro p,
+  .card__details__Pro span,
+  .card__details__Pro button {
+    padding: 0 5px;
+  }
 }
 
 .card_Heading {

@@ -5,19 +5,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/src/style.css" />
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- favIcons -->
-  <!-- prettier-ignore -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-  <!-- prettier-ignore -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-  <!-- prettier-ignore -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-  <!-- prettier-ignore -->
   <link rel="manifest" href="/favicon_io/site.webmanifest" />
   <!-- Animate.JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <!-- Animate.JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Finances</title>
 </head>
 
@@ -55,7 +55,123 @@
     <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
   </div>
 
-  <div class="dashboard__container"></div>
+  <div class="dashboard__container">
+
+    <div class="card card__expense__details">
+
+      <div>
+        <p>Total Expenses</p>
+        <p>R0.00</p>
+      </div>
+
+      <div>
+        <p>This Month</p>
+        <p>R0.00</p>
+      </div>
+
+
+
+
+    </div>
+
+    <div class="sub__Header">
+      <button class="btn addExpenseBtn"><i class="fa-solid fa-plus"></i> New Expense</button>
+    </div>
+
+    <div class="card">
+
+      <div class="card__details card_Heading">
+        <p>Name</p>
+        <p>Category</p>
+        <p>Price</p>
+        <p>Date</p>
+        <p>Description</p>
+
+      </div>
+      <hr />
+
+
+      <div class="card__details card__details__Pro">
+        <p>Stickers</p>
+        <p>Marketing</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class=" btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Container Tubs</p>
+        <p>Marketing</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class=" btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Staff</p>
+        <p>Salaries</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class=" btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Food</p>
+        <p>Ingredients</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class=" btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+
+    </div>
+
+    <div class="card">
+      <p class="card_Heading">Montly Expenses</p>
+    </div>
+
+    <!-- Top Expenses -->
+    <div class="card">
+      <div class="card__nav">
+        <h2>Top Expenses</h2>
+        <p>Top Expense by category</p>
+      </div>
+
+
+      <div class="card__details card_Heading">
+        <p>Type</p>
+        <p>Amount</p>
+        <p>Description</p>
+        <p>Date</p>
+      </div>
+      <hr />
+
+
+      <div class="card__details ">
+        <p>Food</p>
+        <p>R2000.00</p>
+        <p>Ingredients</p>
+        <p>2024-10-15</p>
+      </div>
+      <hr />
+      <div class="card__details ">
+        <p>Equipment</p>
+        <p>R900.00</p>
+        <p>Kitchen Tools</p>
+        <p>2024-02-07</p>
+      </div>
+      <hr />
+
+
+
+    </div>
+
+
+  </div>
 
   <div class="overlay hidden"></div>
 
