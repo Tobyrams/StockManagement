@@ -153,16 +153,19 @@ const addItemModal = document.querySelector(".addItemModal");
 const editItemModal = document.querySelector(".editItemModal");
 const addBatchModal = document.querySelector(".addBatchModal");
 const addProductModal = document.querySelector(".addProductModal");
+const addFinanceModal = document.querySelector(".addFinanceModal");
 //Btns
 const addNewItemBtn = document.querySelector(".addNewItemBtn");
 const addBatchBtn = document.querySelector(".addBatchBtn");
 const addProductBtn = document.querySelector(".addProductBtn");
+const addFinanceBtn = document.querySelector(".addFinanceBtn");
 
 //forms
 const addBatchForm = document.getElementById("addBatchForm");
 const addItemForm = document.getElementById("addItemForm");
 const editItemForm = document.getElementById("editItemForm");
 const addProductForm = document.getElementById("addProductForm");
+const addFinanceForm = document.getElementById("addFinanceForm");
 
 // Btn event listeners ------------------------------
 
@@ -184,6 +187,10 @@ if (addBatchBtn) {
 
 if (addProductBtn) {
   addModal(addProductBtn, addProductForm, addProductModal);
+}
+
+if (addFinanceBtn) {
+  addModal(addFinanceBtn, addFinanceForm, addFinanceModal);
 }
 
 /**
@@ -213,7 +220,13 @@ const handleModalHideAnimation = (modal) => {
 
 overlay.addEventListener("click", function () {
   // Check if either modals exist
-  if (addItemModal || editItemModal || addBatchModal || addProductModal) {
+  if (
+    addItemModal ||
+    editItemModal ||
+    addBatchModal ||
+    addProductModal ||
+    addFinanceModal
+  ) {
     // Handle animation for addItemModal if it exists
 
     if (addItemModal) {
@@ -232,6 +245,11 @@ overlay.addEventListener("click", function () {
     // Handle animation for addProductModal if it exists
     if (addProductModal) {
       handleModalHideAnimation(addProductModal);
+    }
+
+    // Handle animation for addFinanceModal if it exists
+    if (addFinanceModal) {
+      handleModalHideAnimation(addFinanceModal);
     }
   }
 
@@ -259,6 +277,14 @@ if (addProductModal) {
   addProductForm.addEventListener("submit", function (e) {
     e.preventDefault();
     handleModalHideAnimation(addProductModal);
+    comingSoon();
+  });
+}
+
+if (addFinanceModal) {
+  addFinanceForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    handleModalHideAnimation(addFinanceModal);
     comingSoon();
   });
 }

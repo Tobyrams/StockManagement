@@ -1,188 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- fontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- favIcons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
+    <!-- Animate.JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Product</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/style.css" />
-  <!-- fontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- favIcons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-  <link rel="manifest" href="/favicon_io/site.webmanifest" />
-  <!-- Animate.JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <title>Product</title>
-</head>
+  <body>
+    <nav>
+      <div class="nav__container">
+        <div class="sideToggleOpen">
+          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
+        </div>
 
-<body>
-  <nav>
-    <div class="nav__container">
-      <div class="sideToggleOpen">
-        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
+        <div class="nav__heading">
+          <h1>Product Management</h1>
+          <p>Overview of current products</p>
+        </div>
+
+        <div class="nav__date">
+          <i data-lucide="calendar"></i>
+          <span id="currentDate"></span>
+        </div>
       </div>
+    </nav>
 
-      <div class="nav__heading">
-        <h1>Product Management</h1>
-        <p>Overview of current products</p>
+    <div class="sidePanel hidden animate__animated">
+      <div class="sidePanel__header">
+        <h2>BakeTrack</h2>
+        <a href="#" class="sideToggleClose">
+          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
+        ></a>
       </div>
-
-      <div class="nav__date">
-        <i data-lucide="calendar"></i>
-        <span id="currentDate"></span>
-      </div>
-    </div>
-  </nav>
-
-  <div class="sidePanel hidden animate__animated">
-    <div class="sidePanel__header">
-      <h2>BakeTrack</h2>
-      <a href="#" class="sideToggleClose">
-        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
-    </div>
-    <a href="/Dashboard.html" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
-    <a href="/src/Stock.html" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
-    <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
-    <a href="/src/Product.html" class="sidePanel__Tabs active"><i data-lucide="package"></i>Product</a>
-    <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
-    <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
-    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
-  </div>
-
-  <div class="dashboard__container">
-
-
-    <div class="sub__Header">
-      <input id="productSearch" type="text" placeholder="Search Products..." />
-      <button class="btn addProductBtn">Add New Product</button>
-    </div>
-
-    <div class="Form addProductModal hidden animate__animated animate__fadeInUp animate__fast">
-      <h1>Add New Product</h1>
-      <p>Enter details of the Product</p>
-      <form id="addProductForm">
-
-        <label for="productImage">Name:</label>
-        <input type="file" id="name" name="productImage" required placeholder="" /><br />
-
-        <label for="productFlavour">Quantity:</label>
-        <input type="text" name="productFlavour" required placeholder="Enter product flavour" /><br />
-
-        <label for="Quantity">Unit Of Measurement:</label>
-        <input type="text" name="Quantity" required placeholder="Enter the quantity" /><br />
-
-        <label for="startdate">Start Date:</label>
-        <input type="date" id="startdate" name="startdate" required /><br />
-
-        <label for="enddate">End Date:</label>
-        <input type="date" id="enddate" name="enddate" required /><br />
-
-        <label for="status">Status:</label>
-        <select name="status" id="status">
-          <option value="Done">Done</option>
-          <option value="Done">On-Hold</option>
-          <option value="Done">Failed</option>
-          <option value="Done">In Progress</option>
-        </select><br />
-
-        <button class="btn" type="submit">Add Item</button>
-
-      </form>
+      <a href="/Dashboard.html" class="sidePanel__Tabs"
+        ><i data-lucide="home"></i>Home</a
+      >
+      <a href="/src/Stock.html" class="sidePanel__Tabs"
+        ><i data-lucide="layers"></i>Stock</a
+      >
+      <a href="/src/ingredients.html" class="sidePanel__Tabs"
+        ><i data-lucide="shopping-basket"></i>Ingredients</a
+      >
+      <a href="/src/Product.html" class="sidePanel__Tabs active"
+        ><i data-lucide="package"></i>Product</a
+      >
+      <a href="/src/Analytics.html" class="sidePanel__Tabs"
+        ><i data-lucide="line-chart"></i>Analytics</a
+      >
+      <a href="/src/Finances.html" class="sidePanel__Tabs"
+        ><i data-lucide="hand-coins"></i>Finances</a
+      >
+      <a href="/index.html" class="sidePanel__Tabs"
+        ><i data-lucide="log-out"></i><b>LogOut</b></a
+      >
     </div>
 
-    <div class="card">
-
-      <div class="card__details card_Heading">
-        <p>Product</p>
-        <p>Qty</p>
-        <p>Price</p>
-        <p>Start</p>
-        <p>End</p>
-        <p>Status</p>
-
+    <div class="dashboard__container">
+      <div class="sub__Header">
+        <input
+          id="productSearch"
+          type="text"
+          placeholder="Search Products..."
+        />
+        <button class="btn addProductBtn">Add New Product</button>
       </div>
-      <hr />
 
+      <div
+        class="Form addProductModal hidden animate__animated animate__fadeInUp animate__fast"
+      >
+        <h1>Add New Product</h1>
+        <p>Enter details of the Product</p>
+        <form id="addProductForm">
+          <label for="productImage">Name:</label>
+          <input
+            type="file"
+            id="name"
+            name="productImage"
+            required
+            placeholder=""
+          /><br />
 
-      <div class="card__details card__details__Prod">
-        <span class="card__details_product">
-          <img src="/Img/Banana.jpg" alt="">
-          <p>Banana</p>
-        </span>
+          <label for="productFlavour">Quantity:</label>
+          <input
+            type="text"
+            name="productFlavour"
+            required
+            placeholder="Enter product flavour"
+          /><br />
 
-        <p>50</p>
-        <p>R0.00</p>
-        <p class="card__date">2024-03-05</p>
-        <p class="card__date">2024-03-10</p>
+          <label for="Quantity">Unit Of Measurement:</label>
+          <input
+            type="text"
+            name="Quantity"
+            required
+            placeholder="Enter the quantity"
+          /><br />
 
-        <p class="product__Status_Done">Done</p>
+          <label for="startdate">Start Date:</label>
+          <input type="date" id="startdate" name="startdate" required /><br />
+
+          <label for="enddate">End Date:</label>
+          <input type="date" id="enddate" name="enddate" required /><br />
+
+          <label for="status">Status:</label>
+          <select name="status" id="status">
+            <option value="Done">Done</option>
+            <option value="Done">On-Hold</option>
+            <option value="Done">Failed</option>
+            <option value="Done">In Progress</option></select
+          ><br />
+
+          <button class="btn" type="submit">Add Item</button>
+        </form>
       </div>
-      <hr />
 
-      <div class="card__details card__details__Prod">
-        <span class="card__details_product">
-          <img src="/Img/chocolate.jpg" alt="">
-          <p>Chocolate</p>
-        </span>
+      <div class="card">
+        <div class="card__details card_Heading">
+          <p>Product</p>
+          <p>Qty</p>
+          <p>Price</p>
+          <p>Start</p>
+          <p>End</p>
+          <p>Status</p>
+        </div>
+        <hr />
 
-        <p>50</p>
-        <p>R0.00</p>
-        <p class="card__date">2024-03-05</p>
-        <p class="card__date">2024-03-10</p>
+        <div class="card__details card__details__Prod">
+          <span class="card__details_product">
+            <img src="/Img/Banana.jpg" alt="" />
+            <p>Banana</p>
+          </span>
 
-        <p class="product__Status_OnHold">On-Hold</p>
+          <p>15</p>
+          <p>R0.00</p>
+          <p class="card__date">2024-03-05</p>
+          <p class="card__date">2024-03-10</p>
+
+          <p class="product__Status_Done">Done</p>
+        </div>
+        <hr />
+
+        <div class="card__details card__details__Prod">
+          <span class="card__details_product">
+            <img src="/Img/chocolate.jpg" alt="" />
+            <p>Chocolate</p>
+          </span>
+
+          <p>5</p>
+          <p>R0.00</p>
+          <p class="card__date">2024-03-05</p>
+          <p class="card__date">2024-03-10</p>
+
+          <p class="product__Status_OnHold">On-Hold</p>
+        </div>
+        <hr />
+
+        <div class="card__details card__details__Prod">
+          <span class="card__details_product">
+            <img src="/Img/chocolateVanilla.jpg" alt="" />
+            <p>Choc & Vanilla</p>
+          </span>
+
+          <p>0</p>
+          <p>R0.00</p>
+          <p class="card__date">2024-03-05</p>
+          <p class="card__date">2024-03-10</p>
+
+          <p class="product__Status_Failed">Failed</p>
+        </div>
+        <hr />
+
+        <div class="card__details card__details__Prod">
+          <span class="card__details_product">
+            <img src="/Img/coconut.jpg" alt="" />
+            <p>Coconut</p>
+          </span>
+
+          <p>6</p>
+          <p>R0.00</p>
+          <p class="card__date">2024-03-05</p>
+          <p class="card__date">2024-03-10</p>
+
+          <p class="product__Status_Progress">In Progress</p>
+        </div>
+        <hr />
       </div>
-      <hr />
-
-      <div class="card__details card__details__Prod">
-        <span class="card__details_product">
-          <img src="/Img/chocolateVanilla.jpg" alt="">
-          <p>Choc & Vanilla</p>
-        </span>
-
-        <p>50</p>
-        <p>R0.00</p>
-        <p class="card__date">2024-03-05</p>
-        <p class="card__date">2024-03-10</p>
-
-        <p class="product__Status_Failed">Failed</p>
-      </div>
-      <hr />
-
-      <div class="card__details card__details__Prod">
-        <span class="card__details_product">
-          <img src="/Img/coconut.jpg" alt="">
-          <p>Coconut</p>
-        </span>
-
-        <p>50</p>
-        <p>R0.00</p>
-        <p class="card__date">2024-03-05</p>
-        <p class="card__date">2024-03-10</p>
-
-        <p class="product__Status_Progress">In Progress</p>
-      </div>
-      <hr />
-
-
     </div>
 
-  </div>
+    <div class="overlay hidden"></div>
 
-  <div class="overlay hidden"></div>
-
-  <script src="/src/script.js"></script>
-  <!-- Lucid Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    lucide.createIcons();
-  </script>
-</body>
-
+    <script src="/src/script.js"></script>
+    <!-- Lucid Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
 </html>
