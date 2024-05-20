@@ -777,3 +777,9 @@ body {
     }
   }
 }
+/* Removing hover effect on Mobile devices */
+@media (hover: none) {
+  .task_toggle:hover {
+    background-color: black;
+  }
+}
