@@ -238,7 +238,7 @@ body {
 
 .card {
   border: 1px solid rgb(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 5px;
   background-color: #ffff;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
@@ -436,7 +436,7 @@ body {
   margin-top: 1rem;
   flex: 1 0 calc(50% - 10px); /* Two items per row */
   width: 500px;
-  height: 400px;
+  /* height: 400px; */
   position: relative;
 
   border: 1px solid rgb(0, 0, 0, 0.1);
@@ -628,7 +628,7 @@ body {
 
 .chart_container {
   display: flex;
-  padding-top: 2rem;
+  padding-top: 1rem;
 }
 
 .y_axis {
@@ -709,3 +709,14 @@ body {
     transform: rotate(90deg);
   }
 }
+
+/* Pie and Bar Chart/Graphs */
+#myPieChart {
+  /* max-width: 80%; */
+  max-height: 340px;
+}
+
+/* #myDashBarChart {
+  display: flex;
+  flex-direction: column;
+} */
