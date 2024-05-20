@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Toastify.js -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
   <title>Dashboard</title>
 </head>
@@ -35,6 +37,7 @@
         <i data-lucide="calendar-days"></i>
         <span id="currentDate"></span>
       </div>
+
     </div>
   </nav>
 
@@ -51,7 +54,8 @@
     <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
     <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
     <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
-    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
+    <a href="/index.html" class="sidePanel__Tabs logOutBtn"><i data-lucide="log-out"></i><b>LogOut</b></a>
+
   </div>
 
   <div class="dashboard__container">
@@ -211,75 +215,71 @@
       </div>
 
       <!-- Expense Tracking Card -->
-      <div class="card">
-        <h2>Monthly Expenses (Bar)</h2>
-        <canvas id="myDashBarChart"></canvas>
+      <div class="card lineCard ">
+        <h2>Monthly Expenses</h2>
+        <canvas id="myLineChart"></canvas>
       </div>
 
     </div>
 
     <div class="overlay hidden"></div>
 
-    <script src="/src/script.js"></script>
+    <script src="/src/script.js" type="module"></script>
     <!-- Lucid Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
       lucide.createIcons();
     </script>
-
+    <!-- Toastify -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Chart.js -->
     <script>
-      const dashbar = document.getElementById("myDashBarChart").getContext("2d");
-      const dash = new Chart(dashbar, {
-        type: "bar",
+      const ctx = document.getElementById('myLineChart').getContext('2d');
+
+      const myLineChart = new Chart(ctx, {
+        type: 'line',
         data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "Monthly Expenses",
-              data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
-              backgroundColor: "rgb(0,0,0)",
-              borderColor: "rgba(255, 255, 255, 1)",
-              borderWidth: 1,
-              borderRadius: 10,
-            },
-          ],
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            label: 'Monthly Expenses',
+            data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
+            backgroundColor: 'rgba(0, 0, 0, .7)',
+            borderColor: 'rgba(0, 0, 0)',
+            borderWidth: 1,
+            fill: true, // Fill the area under the line
+            tension: 0.4 // Smoothing the line
+          }]
         },
         options: {
-          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          },
           plugins: {
             legend: {
-              position: "top",
+              display: true,
+              position: 'top',
             },
             tooltip: {
               callbacks: {
                 label: function (context) {
-                  let label = context.label || "";
+                  let label = context.dataset.label || '';
                   if (label) {
-                    label += ": ";
+                    label += ': ';
                   }
                   label += context.raw;
                   return label;
-                },
-              },
-            },
-          },
-        },
+                }
+              }
+            }
+          }
+        }
       });
+
     </script>
+
+
 </body>
 
 </html>

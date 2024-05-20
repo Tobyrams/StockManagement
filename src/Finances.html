@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Finances</title>
 </head>
 
@@ -52,7 +54,7 @@
     <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
     <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
     <a href="/src/Finances.html" class="sidePanel__Tabs active"><i data-lucide="hand-coins"></i>Finances</a>
-    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
+    <a href="/index.html" class="sidePanel__Tabs logOutBtn"><i data-lucide="log-out"></i><b>LogOut</b></a>
   </div>
 
   <div class="Form addFinanceModal hidden animate__animated animate__fadeInUp animate__fast">
@@ -161,47 +163,9 @@
       <hr />
     </div>
 
-    <div class="card">
-      <div class="card__nav">
-        <h2>Montly Expenses</h2>
-      </div>
-
-      <div class="chart_container">
-        <div class="y_axis">
-          <span>300</span>
-          <span>200</span>
-          <span>100</span>
-          <span>0</span>
-        </div>
-        <div class="bar_chart">
-          <div class="bar bar-jan"></div>
-          <div class="bar bar-feb"></div>
-          <div class="bar bar-mar"></div>
-          <div class="bar bar-apr"></div>
-          <div class="bar bar-may"></div>
-          <div class="bar bar-jun"></div>
-          <div class="bar bar-jul"></div>
-          <div class="bar bar-aug"></div>
-          <div class="bar bar-sep"></div>
-          <div class="bar bar-oct"></div>
-          <div class="bar bar-nov"></div>
-          <div class="bar bar-dec"></div>
-        </div>
-      </div>
-      <div class="x_axis">
-        <span>Jan</span>
-        <span>Feb</span>
-        <span>Mar</span>
-        <span>Apr</span>
-        <span>May</span>
-        <span>Jun</span>
-        <span>Jul</span>
-        <span>Aug</span>
-        <span>Sep</span>
-        <span>Oct</span>
-        <span>Nov</span>
-        <span>Dec</span>
-      </div>
+    <div class="card lineCard ">
+      <h2>Monthly Expenses</h2>
+      <canvas id="myLineChart"></canvas>
     </div>
 
     <!-- Top Expenses -->
@@ -243,6 +207,52 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
+  </script>
+
+  <script>
+    const ctx = document.getElementById('myLineChart').getContext('2d');
+
+    const myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: 'Monthly Expenses',
+          data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
+          backgroundColor: 'rgba(0, 0, 0, .5)',
+          borderColor: 'rgba(0, 0, 0)',
+          borderWidth: 1,
+          fill: true, // Fill the area under the line
+          tension: 0.4 // Smoothing the line
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.dataset.label || '';
+                if (label) {
+                  label += ': ';
+                }
+                label += context.raw;
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+
   </script>
 </body>
 

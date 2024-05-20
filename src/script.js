@@ -10,42 +10,103 @@ function removeAnimation() {
   sidePanel.classList.remove("animate__slideOutLeft");
 }
 
-toggeOpen.addEventListener("click", () => {
-  sidePanel.classList.remove("hidden");
-  removeAnimation();
-  sidePanel.classList.add("animate__slideInLeft", "animate__fast");
-  overlay.classList.remove("hidden");
-});
-
-toggeClose.addEventListener("click", function () {
-  sidePanel.classList.remove("hidden");
-  removeAnimation();
-  sidePanel.classList.add("animate__slideOutLeft");
-  overlay.classList.add("hidden");
-});
-
-overlay.addEventListener("click", function () {
-  if (!sidePanel.classList.contains("hidden")) {
+if (toggeOpen || toggeClose || overlay) {
+  toggeOpen.addEventListener("click", () => {
     sidePanel.classList.remove("hidden");
+    removeAnimation();
+    sidePanel.classList.add("animate__slideInLeft", "animate__fast");
+    overlay.classList.remove("hidden");
+  });
+
+  toggeClose.addEventListener("click", function () {
+    sidePanel.classList.remove("hidden");
+    removeAnimation();
+    sidePanel.classList.add("animate__slideOutLeft");
+    overlay.classList.add("hidden");
+  });
+
+  overlay.addEventListener("click", function () {
+    if (!sidePanel.classList.contains("hidden")) {
+      sidePanel.classList.remove("hidden");
+    }
+    removeAnimation();
+    sidePanel.classList.add("animate__slideOutLeft");
+    // overlay.classList.add("hidden");
+  });
+}
+// Login
+const loginForm = document.getElementById("loginForm");
+
+// Function to set the visibility of buttons based on local storage
+function setRoleRestrictions() {
+  var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
+  var isAdmin = localStorage.getItem("isAdmin");
+
+  if (isAdmin === "true") {
+    buttons.forEach(function (button) {
+      button.style.visibility = "visible";
+    });
+
+    setTimeout(() => {
+      Toastify({
+        text: "Welcome Admin",
+        className: "info",
+        style: {
+          background: "Black",
+        },
+      }).showToast();
+    }, 1000);
+  } else if (isAdmin === "false") {
+    buttons.forEach(function (button) {
+      button.style.visibility = "hidden";
+    });
   }
-  removeAnimation();
-  sidePanel.classList.add("animate__slideOutLeft");
-  // overlay.classList.add("hidden");
+}
+
+if (loginForm) {
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    localStorage.setItem("username", email);
+
+    if (email === "admin12@gmail.com" && password === "admin123") {
+      window.location.href = "/Dashboard.html";
+      localStorage.setItem("isAdmin", "true");
+    } else {
+      window.location.href = "/Dashboard.html";
+      localStorage.setItem("isAdmin", "false");
+    }
+  });
+}
+
+// Set the button visibility when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+  setRoleRestrictions();
 });
+
+const logOutBtn = document.querySelector(".logOutBtn");
+if (logOutBtn) {
+  logOutBtn.addEventListener("click", function () {
+    localStorage.removeItem("isAdmin");
+  });
+}
 
 // Dashboard date
-document.addEventListener("DOMContentLoaded", function () {
-  // Get the current date
-  const currentDate = new Date();
-  const day = String(currentDate.getDate()).padStart(2, "0"); // Ensures two-digit format with leading zero if necessary
-  const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so we add 1
-  const year = currentDate.getFullYear();
-  const formattedDate = `${day}-${month}-${year}`;
 
-  // Update the content of the element with id "currentDate"
-  document.getElementById("currentDate").textContent = formattedDate;
-});
+// Get the current date
+const currentDate = new Date();
+const day = String(currentDate.getDate()).padStart(2, "0"); // Ensures two-digit format with leading zero if necessary
+const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so we add 1
+const year = currentDate.getFullYear();
+const formattedDate = `${day}-${month}-${year}`;
 
+// Update the content of the element with id "currentDate"
+const currentDateElement = document.getElementById("currentDate");
+if (currentDateElement) {
+  currentDateElement.textContent = formattedDate;
+}
 // ---------------------Card Horizontal  Scroll------------------
 // https://www.youtube.com/watch?v=C9EWifQ5xqA
 
@@ -217,46 +278,47 @@ const handleModalHideAnimation = (modal) => {
     }, 650);
   }
 };
+if (overlay) {
+  overlay.addEventListener("click", function () {
+    // Check if either modals exist
+    if (
+      addItemModal ||
+      editItemModal ||
+      addBatchModal ||
+      addProductModal ||
+      addFinanceModal
+    ) {
+      // Handle animation for addItemModal if it exists
 
-overlay.addEventListener("click", function () {
-  // Check if either modals exist
-  if (
-    addItemModal ||
-    editItemModal ||
-    addBatchModal ||
-    addProductModal ||
-    addFinanceModal
-  ) {
-    // Handle animation for addItemModal if it exists
+      if (addItemModal) {
+        handleModalHideAnimation(addItemModal);
+      }
 
-    if (addItemModal) {
-      handleModalHideAnimation(addItemModal);
+      // Handle animation for editItemModal if it exists
+      if (editItemModal) {
+        handleModalHideAnimation(editItemModal);
+      }
+
+      // Handle animation for addBatchModal if it exists
+      if (addBatchModal) {
+        handleModalHideAnimation(addBatchModal);
+      }
+      // Handle animation for addProductModal if it exists
+      if (addProductModal) {
+        handleModalHideAnimation(addProductModal);
+      }
+
+      // Handle animation for addFinanceModal if it exists
+      if (addFinanceModal) {
+        handleModalHideAnimation(addFinanceModal);
+      }
     }
 
-    // Handle animation for editItemModal if it exists
-    if (editItemModal) {
-      handleModalHideAnimation(editItemModal);
-    }
-
-    // Handle animation for addBatchModal if it exists
-    if (addBatchModal) {
-      handleModalHideAnimation(addBatchModal);
-    }
-    // Handle animation for addProductModal if it exists
-    if (addProductModal) {
-      handleModalHideAnimation(addProductModal);
-    }
-
-    // Handle animation for addFinanceModal if it exists
-    if (addFinanceModal) {
-      handleModalHideAnimation(addFinanceModal);
-    }
-  }
-
-  setTimeout(() => {
-    overlay.classList.add("hidden");
-  }, 650);
-});
+    setTimeout(() => {
+      overlay.classList.add("hidden");
+    }, 650);
+  });
+}
 
 if (addBatchForm) {
   addBatchForm.addEventListener("submit", function (e) {
@@ -414,28 +476,29 @@ function comingSoon() {
 }
 
 // Analytics Graph toggle
-const togglePieBtn = document.getElementById("toggle-Pie");
+const toggleLineBtn = document.getElementById("toggle-Line");
 const toggleBarBtn = document.getElementById("toggle-Bar");
 const container_toggles = document.querySelector(".container_toggles");
 
-const pieCard = document.querySelector(".pieCard");
+const LineCard = document.querySelector(".lineCard");
 const barCard = document.querySelector(".barCard");
 
 function toggleView() {
   // Setting toggle active state
-  togglePieBtn.classList.toggle("task-toggle--active");
+  toggleLineBtn.classList.toggle("task-toggle--active");
   toggleBarBtn.classList.toggle("task-toggle--active");
 
   // Hiding the pages
-  pieCard.classList.toggle("hidden");
+  LineCard.classList.toggle("hidden");
   barCard.classList.toggle("hidden");
 
   barCard.classList.toggle("barCardStyle");
 }
 
-togglePieBtn.addEventListener("click", toggleView);
-toggleBarBtn.addEventListener("click", toggleView);
-
+if (toggleLineBtn || toggleBarBtn) {
+  toggleLineBtn.addEventListener("click", toggleView);
+  toggleBarBtn.addEventListener("click", toggleView);
+}
 /**
  * Adds a CSS animation class to an element, then removes it after a specified time.
  * @param {HTMLElement} className - The DOM element to animate.
