@@ -1,302 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- fontAwesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- favIcons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon_io/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon_io/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon_io/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Finances</title>
-  </head>
 
-  <body class="">
-    <nav>
-      <div class="nav__container">
-        <div class="sideToggleOpen">
-          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- fontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- favIcons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <title>Finances</title>
+</head>
 
-        <div class="nav__heading">
-          <h1>Finances</h1>
-          <p>Overview of our expenses</p>
-        </div>
-
-        <div class="nav__date">
-          <i data-lucide="calendar"></i>
-          <span id="currentDate"></span>
-        </div>
+<body class="">
+  <nav>
+    <div class="nav__container">
+      <div class="sideToggleOpen">
+        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
       </div>
-    </nav>
 
-    <div class="sidePanel hidden animate__animated">
-      <div class="sidePanel__header">
-        <h2>BakeTrack</h2>
-        <a href="#" class="sideToggleClose">
-          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
-        ></a>
+      <div class="nav__heading">
+        <h1>Finances</h1>
+        <p>Overview of our expenses</p>
       </div>
-      <a href="/Dashboard.html" class="sidePanel__Tabs"
-        ><i data-lucide="home"></i>Home</a
-      >
-      <a href="/src/Stock.html" class="sidePanel__Tabs"
-        ><i data-lucide="layers"></i>Stock</a
-      >
-      <a href="/src/ingredients.html" class="sidePanel__Tabs"
-        ><i data-lucide="shopping-basket"></i>Ingredients</a
-      >
-      <a href="/src/Product.html" class="sidePanel__Tabs"
-        ><i data-lucide="package"></i>Product</a
-      >
-      <a href="/src/Analytics.html" class="sidePanel__Tabs"
-        ><i data-lucide="line-chart"></i>Analytics</a
-      >
-      <a href="/src/Finances.html" class="sidePanel__Tabs active"
-        ><i data-lucide="hand-coins"></i>Finances</a
-      >
-      <a href="/index.html" class="sidePanel__Tabs"
-        ><i data-lucide="log-out"></i><b>LogOut</b></a
-      >
+
+      <div class="nav__date">
+        <i data-lucide="calendar"></i>
+        <span id="currentDate"></span>
+      </div>
     </div>
+  </nav>
 
-    <div
-      class="Form addFinanceModal hidden animate__animated animate__fadeInUp animate__fast"
-    >
-      <h1>Add New Expense</h1>
-      <p>Enter details of the Expense</p>
-      <form id="addFinanceForm">
-        <label for="expenseName">Expense Name:</label>
-        <input
-          type="text"
-          id="expenseName"
-          name="expenseName"
-          required
-          placeholder="Enter expense name"
-        /><br />
-
-        <label for="expenseCategory">Status:</label>
-        <select name="expenseCategory" id="expenseCategory" required>
-          <option value="">---Select Status---</option>
-          <option value="Food and Beverage Costs">
-            Food and Beverage Costs
-          </option>
-          <option value="Labor Costs">Labor Costs</option>
-          <option value="Rent and Utilities">Rent and Utilities</option>
-          <option value="Supplies">Supplies</option>
-          <option value="Marketing and Advertising">
-            Marketing and Advertising
-          </option>
-          <option value="Insurance">Insurance</option>
-          <option value="Maintenance and Repairs">
-            Maintenance and Repairs
-          </option>
-        </select>
-        <br />
-
-        <label for="expensePrice">Price:</label>
-        <input
-          type="number"
-          name="expensePrice"
-          required
-          placeholder="Enter expense price"
-        /><br />
-
-        <label for="expenseDate">Date:</label>
-        <input type="date" id="expenseDate" name="expenseDate" required /><br />
-
-        <label for="expenseDescription">End Date:</label>
-        <textarea
-          name="expenseDescription"
-          id="expenseDescription"
-          placeholder="Enter desctiption"
-          style="height: 100px; padding: 0.5rem"
-          required
-        ></textarea
-        ><br />
-
-        <button class="btn" type="submit">Add Expense</button>
-      </form>
+  <div class="sidePanel hidden animate__animated">
+    <div class="sidePanel__header">
+      <h2>BakeTrack</h2>
+      <a href="#" class="sideToggleClose">
+        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
     </div>
+    <a href="/Dashboard.html" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
+    <a href="/src/Stock.html" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
+    <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
+    <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+    <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
+    <a href="/src/Finances.html" class="sidePanel__Tabs active"><i data-lucide="hand-coins"></i>Finances</a>
+    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
+  </div>
 
-    <div class="dashboard__container">
-      <div class="card card__expense__details">
-        <div>
-          <p>Total Expenses</p>
-          <p>R0.00</p>
-        </div>
+  <div class="Form addFinanceModal hidden animate__animated animate__fadeInUp animate__fast">
+    <h1>Add New Expense</h1>
+    <p>Enter details of the Expense</p>
+    <form id="addFinanceForm">
+      <label for="expenseName">Expense Name:</label>
+      <input type="text" id="expenseName" name="expenseName" required placeholder="Enter expense name" /><br />
 
-        <div>
-          <p>This Month</p>
-          <p>R0.00</p>
-        </div>
+      <label for="expenseCategory">Status:</label>
+      <select name="expenseCategory" id="expenseCategory" required>
+        <option value="">---Select Status---</option>
+        <option value="Food and Beverage Costs">
+          Food and Beverage Costs
+        </option>
+        <option value="Labor Costs">Labor Costs</option>
+        <option value="Rent and Utilities">Rent and Utilities</option>
+        <option value="Supplies">Supplies</option>
+        <option value="Marketing and Advertising">
+          Marketing and Advertising
+        </option>
+        <option value="Insurance">Insurance</option>
+        <option value="Maintenance and Repairs">
+          Maintenance and Repairs
+        </option>
+      </select>
+      <br />
+
+      <label for="expensePrice">Price:</label>
+      <input type="number" name="expensePrice" required placeholder="Enter expense price" /><br />
+
+      <label for="expenseDate">Date:</label>
+      <input type="date" id="expenseDate" name="expenseDate" required /><br />
+
+      <label for="expenseDescription">End Date:</label>
+      <textarea name="expenseDescription" id="expenseDescription" placeholder="Enter desctiption"
+        style="height: 100px; padding: 0.5rem" required></textarea><br />
+
+      <button class="btn" type="submit">Add Expense</button>
+    </form>
+  </div>
+
+  <div class="dashboard__container">
+    <div class="card card__expense__details">
+      <div>
+        <p>Total Expenses</p>
+        <p>R0.00</p>
       </div>
 
-      <div class="sub__Header">
-        <button class="btn addFinanceBtn">
-          <i class="fa-solid fa-plus"></i> New Expense
-        </button>
-      </div>
-
-      <div class="card">
-        <div class="card__details card_Heading">
-          <p>Name</p>
-          <p>Category</p>
-          <p>Price</p>
-          <p>Date</p>
-          <p>Description</p>
-        </div>
-        <hr />
-
-        <div class="card__details card__details__Pro">
-          <p>Stickers</p>
-          <p>Marketing</p>
-          <p>R0.00</p>
-          <p>2024-10-15</p>
-          <button class="btndesView" onclick="comingSoon()">View</button>
-        </div>
-        <hr />
-
-        <div class="card__details card__details__Pro">
-          <p>Container Tubs</p>
-          <p>Marketing</p>
-          <p>R0.00</p>
-          <p>2024-10-15</p>
-          <button class="btndesView" onclick="comingSoon()">View</button>
-        </div>
-        <hr />
-
-        <div class="card__details card__details__Pro">
-          <p>Staff</p>
-          <p>Salaries</p>
-          <p>R0.00</p>
-          <p>2024-10-15</p>
-          <button class="btndesView" onclick="comingSoon()">View</button>
-        </div>
-        <hr />
-
-        <div class="card__details card__details__Pro">
-          <p>Food</p>
-          <p>Ingredients</p>
-          <p>R0.00</p>
-          <p>2024-10-15</p>
-          <button class="btndesView" onclick="comingSoon()">View</button>
-        </div>
-        <hr />
-      </div>
-
-      <div class="card">
-        <div class="card__nav">
-          <h2>Montly Expenses</h2>
-        </div>
-
-        <div class="chart_container">
-          <div class="y_axis">
-            <span>300</span>
-            <span>200</span>
-            <span>100</span>
-            <span>0</span>
-          </div>
-          <div class="bar_chart">
-            <div class="bar bar-jan"></div>
-            <div class="bar bar-feb"></div>
-            <div class="bar bar-mar"></div>
-            <div class="bar bar-apr"></div>
-            <div class="bar bar-may"></div>
-            <div class="bar bar-jun"></div>
-            <div class="bar bar-jul"></div>
-            <div class="bar bar-aug"></div>
-            <div class="bar bar-sep"></div>
-            <div class="bar bar-oct"></div>
-            <div class="bar bar-nov"></div>
-            <div class="bar bar-dec"></div>
-          </div>
-        </div>
-        <div class="x_axis">
-          <span>Jan</span>
-          <span>Feb</span>
-          <span>Mar</span>
-          <span>Apr</span>
-          <span>May</span>
-          <span>Jun</span>
-          <span>Jul</span>
-          <span>Aug</span>
-          <span>Sep</span>
-          <span>Oct</span>
-          <span>Nov</span>
-          <span>Dec</span>
-        </div>
-      </div>
-
-      <!-- Top Expenses -->
-      <div class="card">
-        <div class="card__nav">
-          <h2>Top Expenses</h2>
-          <p>Top Expense by category</p>
-        </div>
-
-        <div class="card__details card_Heading">
-          <p>Type</p>
-          <p>Amount</p>
-          <p>Description</p>
-          <p>Date</p>
-        </div>
-        <hr />
-
-        <div class="card__details">
-          <p>Food</p>
-          <p>R2000.00</p>
-          <p>Ingredients</p>
-          <p>2024-10-15</p>
-        </div>
-        <hr />
-        <div class="card__details">
-          <p>Equipment</p>
-          <p>R900.00</p>
-          <p>Kitchen Tools</p>
-          <p>2024-02-07</p>
-        </div>
-        <hr />
+      <div>
+        <p>This Month</p>
+        <p>R0.00</p>
       </div>
     </div>
 
-    <div class="overlay hidden"></div>
+    <div class="sub__Header">
+      <button class="btn addFinanceBtn">
+        <i class="fa-solid fa-plus"></i> New Expense
+      </button>
+    </div>
 
-    <script src="/src/script.js"></script>
-    <!-- Lucid Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+    <div class="card">
+      <div class="card__details card_Heading">
+        <p>Name</p>
+        <p>Category</p>
+        <p>Price</p>
+        <p>Date</p>
+        <p>Description</p>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Stickers</p>
+        <p>Marketing</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class="btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Container Tubs</p>
+        <p>Marketing</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class="btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Staff</p>
+        <p>Salaries</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class="btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+
+      <div class="card__details card__details__Pro">
+        <p>Food</p>
+        <p>Ingredients</p>
+        <p>R0.00</p>
+        <p>2024-10-15</p>
+        <button class="btndesView" onclick="comingSoon()">View</button>
+      </div>
+      <hr />
+    </div>
+
+    <div class="card">
+      <div class="card__nav">
+        <h2>Montly Expenses</h2>
+      </div>
+
+      <div class="chart_container">
+        <div class="y_axis">
+          <span>300</span>
+          <span>200</span>
+          <span>100</span>
+          <span>0</span>
+        </div>
+        <div class="bar_chart">
+          <div class="bar bar-jan"></div>
+          <div class="bar bar-feb"></div>
+          <div class="bar bar-mar"></div>
+          <div class="bar bar-apr"></div>
+          <div class="bar bar-may"></div>
+          <div class="bar bar-jun"></div>
+          <div class="bar bar-jul"></div>
+          <div class="bar bar-aug"></div>
+          <div class="bar bar-sep"></div>
+          <div class="bar bar-oct"></div>
+          <div class="bar bar-nov"></div>
+          <div class="bar bar-dec"></div>
+        </div>
+      </div>
+      <div class="x_axis">
+        <span>Jan</span>
+        <span>Feb</span>
+        <span>Mar</span>
+        <span>Apr</span>
+        <span>May</span>
+        <span>Jun</span>
+        <span>Jul</span>
+        <span>Aug</span>
+        <span>Sep</span>
+        <span>Oct</span>
+        <span>Nov</span>
+        <span>Dec</span>
+      </div>
+    </div>
+
+    <!-- Top Expenses -->
+    <div class="card">
+      <div class="card__nav">
+        <h2>Top Expenses</h2>
+        <p>Top Expense by category</p>
+      </div>
+
+      <div class="card__details card_Heading">
+        <p>Type</p>
+        <p>Amount</p>
+        <p>Description</p>
+        <p>Date</p>
+      </div>
+      <hr />
+
+      <div class="card__details">
+        <p>Food</p>
+        <p>R2000.00</p>
+        <p>Ingredients</p>
+        <p>2024-10-15</p>
+      </div>
+      <hr />
+      <div class="card__details">
+        <p>Equipment</p>
+        <p>R900.00</p>
+        <p>Kitchen Tools</p>
+        <p>2024-02-07</p>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <div class="overlay hidden"></div>
+
+  <script src="/src/script.js"></script>
+  <!-- Lucid Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
 </html>

@@ -10,13 +10,9 @@
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- favIcons -->
-  <!-- prettier-ignore -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-  <!-- prettier-ignore -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-  <!-- prettier-ignore -->
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-  <!-- prettier-ignore -->
   <link rel="manifest" href="/favicon_io/site.webmanifest" />
   <!-- Animate.JS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -67,27 +63,24 @@
       <button class="btn addNewItemBtn">Add New Item</button>
     </div>
 
-    <!-- prettier-ignore -->
+
     <div class="Form addItemModal hidden animate__animated animate__fadeInUp animate__fast">
       <h1>Add New Item</h1>
       <p>Enter details of the item</p>
       <form id="addItemForm">
         <label for="name">Name:</label>
-        <!-- prettier-ignore -->
         <input type="text" id="name" name="name" required placeholder="Enter product name" /><br />
 
         <label for="Quantity">Quantity:</label>
-        <!-- prettier-ignore -->
         <input type="number" id="Quantity" name="Quantity" required placeholder="Enter the quantity" /><br />
 
         <label for="UnitOfMeasurement">Unit Of Measurement:</label>
-        <!-- prettier-ignore -->
         <input type="text" id="UnitOfMeasurement" name="UnitOfMeasurement" required
           placeholder="Enter the unit e.g. kg" /><br />
 
         <label for="expirydate">expirydate:</label>
-        <!-- prettier-ignore -->
         <input type="date" id="expirydate" name="expirydate" required /><br /><br />
+
         <button class="btn" type="submit">Add Item</button>
       </form>
     </div>
@@ -97,21 +90,19 @@
       <p>Edit the details of the selected Item</p>
       <form id="editItemForm">
         <label for="name">Name:</label>
-        <!-- prettier-ignore -->
-        <input type="text" id="editname" name="name" required placeholder="Enter product name" /><br />
 
+        <input type="text" id="editname" name="editname" required placeholder="Enter product name" /><br />
         <label for="Quantity">Quantity:</label>
-        <!-- prettier-ignore -->
-        <input type="number" id="editQuantity" name="Quantity" required placeholder="Enter the quantity" /><br />
 
+        <input type="number" id="editQuantity" name="Quantity" required placeholder="Enter the quantity" /><br />
         <label for="UnitOfMeasurement">Unit Of Measurement:</label>
-        <!-- prettier-ignore -->
+
         <input type="text" id="editUnitOfMeasurement" name="UnitOfMeasurement" required
           placeholder="Enter the unit e.g. kg" /><br />
 
         <label for="expirydate">expirydate:</label>
-        <!-- prettier-ignore -->
         <input type="date" id="editexpirydate" name="expirydate" required /><br /><br />
+
         <button class="btn" type="submit">Edit Item</button>
       </form>
     </div>

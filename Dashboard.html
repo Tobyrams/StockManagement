@@ -1,252 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- favIcons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon_io/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon_io/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon_io/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
- <!-- Chart.js -->
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <title>Dashboard</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- favIcons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <body class="animate__animated animate__fadeIn animate__slow">
-    <nav>
-      <div class="nav__container">
-        <div class="sideToggleOpen">
-          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-        </div>
+  <title>Dashboard</title>
+</head>
 
-        <div class="nav__heading">
-          <h1>Dashboard</h1>
-          <p>Overview of everything</p>
-        </div>
-
-        <div class="nav__date">
-          <input type="text" id="filterInput" placeholder="Search..." />
-          <i data-lucide="calendar-days"></i>
-          <span id="currentDate"></span>
-        </div>
-      </div>
-    </nav>
-
-    <div class="sidePanel hidden animate__animated">
-      <div class="sidePanel__header">
-        <h2>BakeTrack</h2>
-        <a class="sideToggleClose">
-          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
-        ></a>
+<body class="animate__animated animate__fadeIn animate__slow">
+  <nav>
+    <div class="nav__container">
+      <div class="sideToggleOpen">
+        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
       </div>
 
-      <a href="/Dashboard.html" class="sidePanel__Tabs active"
-        ><i data-lucide="home"></i>Home</a
-      >
-      <a href="/src/Stock.html" class="sidePanel__Tabs"
-        ><i data-lucide="layers"></i>Stock</a
-      >
-      <a href="/src/ingredients.html" class="sidePanel__Tabs"
-        ><i data-lucide="shopping-basket"></i>Ingredients</a
-      >
-      <a href="/src/Product.html" class="sidePanel__Tabs"
-        ><i data-lucide="package"></i>Product</a
-      >
-      <a href="/src/Analytics.html" class="sidePanel__Tabs"
-        ><i data-lucide="line-chart"></i>Analytics</a
-      >
-      <a href="/src/Finances.html" class="sidePanel__Tabs"
-        ><i data-lucide="hand-coins"></i>Finances</a
-      >
-      <a href="/index.html" class="sidePanel__Tabs"
-        ><i data-lucide="log-out"></i><b>LogOut</b></a
-      >
+      <div class="nav__heading">
+        <h1>Dashboard</h1>
+        <p>Overview of everything</p>
+      </div>
+
+      <div class="nav__date">
+        <input type="text" id="filterInput" placeholder="Search..." />
+        <i data-lucide="calendar-days"></i>
+        <span id="currentDate"></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="sidePanel hidden animate__animated">
+    <div class="sidePanel__header">
+      <h2>BakeTrack</h2>
+      <a class="sideToggleClose">
+        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
     </div>
 
-    <div class="dashboard__container">
-      <div class="sml__cards">
-        <div class="card__sml">
-          <p>Total Revenue</p>
-          <br />
-          <span>R</span>
-          <h3>R15,000.00</h3>
-          <p>+10% from last month</p>
+    <a href="/Dashboard.html" class="sidePanel__Tabs active"><i data-lucide="home"></i>Home</a>
+    <a href="/src/Stock.html" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
+    <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
+    <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+    <a href="/src/Analytics.html" class="sidePanel__Tabs"><i data-lucide="line-chart"></i>Analytics</a>
+    <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
+  </div>
+
+  <div class="dashboard__container">
+    <div class="sml__cards">
+      <div class="card__sml">
+        <p>Total Revenue</p>
+        <br />
+        <span>R</span>
+        <h3>R15,000.00</h3>
+        <p>+10% from last month</p>
+      </div>
+
+      <div class="card__sml">
+        <p>Products Sold</p>
+        <br />
+        <span><i data-lucide="box"></i></span>
+        <h3>9</h3>
+      </div>
+
+      <div class="card__sml">
+        <p>Total Revenue</p>
+        <span>R</span>
+        <h3>R15,000.00</h3>
+        <p>+10% from last month</p>
+      </div>
+
+      <div class="card__sml">
+        <p>Products Sold</p>
+        <br />
+        <span><i data-lucide="box"></i></span>
+        <h3>9</h3>
+      </div>
+
+      <div class="card__sml">
+        <p>Products Sold</p>
+        <br />
+        <span><i data-lucide="box"></i></span>
+        <h3>9</h3>
+      </div>
+    </div>
+
+    <div class="lg__cards">
+      <!-- Recent Sales Card -->
+      <div class="card__lg">
+        <h2>Recent Sales</h2>
+        <p>150 Sales this month.</p>
+        <br />
+
+        <div class="card_item">
+          <div class="avatar__icon"><i data-lucide="user-round"></i></div>
+          <div class="card__info">
+            <h3>Olivia Martin</h3>
+            <p>olivia.martin@gmail.com</p>
+          </div>
+
+          <h3 class="card__price">R0.00</h3>
         </div>
 
-        <div class="card__sml">
-          <p>Products Sold</p>
-          <br />
-          <span><i data-lucide="box"></i></span>
-          <h3>9</h3>
-        </div>
+        <div class="card_item">
+          <div class="avatar__icon"><i data-lucide="user-round"></i></div>
+          <div class="card__info">
+            <h3>Jhon Doe</h3>
+            <p>jhon.doe@gmail.com</p>
+          </div>
 
-        <div class="card__sml">
-          <p>Total Revenue</p>
-          <span>R</span>
-          <h3>R15,000.00</h3>
-          <p>+10% from last month</p>
+          <h3 class="card__price">R0.00</h3>
         </div>
+        <div class="card_item">
+          <div class="avatar__icon"><i data-lucide="user-round"></i></div>
+          <div class="card__info">
+            <h3>Mike Hill</h3>
+            <p>mike.hill@gmail.com</p>
+          </div>
 
-        <div class="card__sml">
-          <p>Products Sold</p>
-          <br />
-          <span><i data-lucide="box"></i></span>
-          <h3>9</h3>
+          <h3 class="card__price">R0.00</h3>
         </div>
+        <div class="card_item">
+          <div class="avatar__icon"><i data-lucide="user-round"></i></div>
+          <div class="card__info">
+            <h3>Tshepo Peters</h3>
+            <p>tshepo.peters@gmail.com</p>
+          </div>
 
-        <div class="card__sml">
-          <p>Products Sold</p>
-          <br />
-          <span><i data-lucide="box"></i></span>
-          <h3>9</h3>
+          <h3 class="card__price">R0.00</h3>
         </div>
       </div>
 
-      <div class="lg__cards">
-        <!-- Recent Sales Card -->
-        <div class="card__lg">
-          <h2>Recent Sales</h2>
-          <p>150 Sales this month.</p>
-          <br />
+      <!-- Low Stock Card -->
+      <div class="card__lg card__lowStock">
+        <h2>Low Stock Items</h2>
+        <br />
 
-          <div class="card_item">
-            <div class="avatar__icon"><i data-lucide="user-round"></i></div>
-            <div class="card__info">
-              <h3>Olivia Martin</h3>
-              <p>olivia.martin@gmail.com</p>
-            </div>
-
-            <h3 class="card__price">R0.00</h3>
-          </div>
-
-          <div class="card_item">
-            <div class="avatar__icon"><i data-lucide="user-round"></i></div>
-            <div class="card__info">
-              <h3>Jhon Doe</h3>
-              <p>jhon.doe@gmail.com</p>
-            </div>
-
-            <h3 class="card__price">R0.00</h3>
-          </div>
-          <div class="card_item">
-            <div class="avatar__icon"><i data-lucide="user-round"></i></div>
-            <div class="card__info">
-              <h3>Mike Hill</h3>
-              <p>mike.hill@gmail.com</p>
-            </div>
-
-            <h3 class="card__price">R0.00</h3>
-          </div>
-          <div class="card_item">
-            <div class="avatar__icon"><i data-lucide="user-round"></i></div>
-            <div class="card__info">
-              <h3>Tshepo Peters</h3>
-              <p>tshepo.peters@gmail.com</p>
-            </div>
-
-            <h3 class="card__price">R0.00</h3>
-          </div>
+        <div class="card_item">
+          <i data-lucide="chevron-right"></i>
+          <p>Tomatos</p>
+          <p class="card__items">25 Remaining</p>
         </div>
 
-        <!-- Low Stock Card -->
-        <div class="card__lg card__lowStock">
-          <h2>Low Stock Items</h2>
-          <br />
-
-          <div class="card_item">
-            <i data-lucide="chevron-right"></i>
-            <p>Tomatos</p>
-            <p class="card__items">25 Remaining</p>
-          </div>
-
-          <div class="card_item">
-            <i data-lucide="chevron-right"></i>
-            <p>Carrots</p>
-            <p class="card__items">5 Remaining</p>
-          </div>
-
-          <div class="card_item">
-            <i data-lucide="chevron-right"></i>
-            <p>Cucumber</p>
-            <p class="card__items">
-              <span style="color: red">0</span> Remaining
-            </p>
-          </div>
-
-          <div class="card_item">
-            <i data-lucide="chevron-right"></i>
-            <p>Bell Peppers</p>
-            <p class="card__items">10 Remaining</p>
-          </div>
+        <div class="card_item">
+          <i data-lucide="chevron-right"></i>
+          <p>Carrots</p>
+          <p class="card__items">5 Remaining</p>
         </div>
 
-        <!-- Expiry Tracking Card -->
-        <div class="card__lg">
-          <h2>Expiry Tracking</h2>
-          <br />
-
-          <div class="expiry__info info_Heading">
-            <p>Ingredient</p>
-            <p>Expiry date</p>
-          </div>
-
-          <hr />
-
-          <div class="expiry__info">
-            <p>Rice</p>
-            <p>2024-10-15</p>
-          </div>
-
-          <hr />
-
-          <div class="expiry__info">
-            <p>Ground Beef</p>
-            <p>2024-05-05</p>
-          </div>
-
-          <hr />
-
-          <div class="expiry__info">
-            <p>Feta Cheese</p>
-            <p>2024-12-01</p>
-          </div>
-
-          <hr />
-
-          <div class="expiry__info">
-            <p>Olive Oil</p>
-            <p>2024-12-01</p>
-          </div>
+        <div class="card_item">
+          <i data-lucide="chevron-right"></i>
+          <p>Cucumber</p>
+          <p class="card__items">
+            <span style="color: red">0</span> Remaining
+          </p>
         </div>
 
-        <!-- Expense Tracking Card -->
-        <div class="card__lg">
-          <h2>Monthly Expenses (Bar)</h2>
-          <canvas id="myDashBarChart"></canvas>
+        <div class="card_item">
+          <i data-lucide="chevron-right"></i>
+          <p>Bell Peppers</p>
+          <p class="card__items">10 Remaining</p>
         </div>
-        
+      </div>
+
+      <!-- Expiry Tracking Card -->
+      <div class="card__lg">
+        <h2>Expiry Tracking</h2>
+        <br />
+
+        <div class="expiry__info info_Heading">
+          <p>Ingredient</p>
+          <p>Expiry date</p>
+        </div>
+
+        <hr />
+
+        <div class="expiry__info">
+          <p>Rice</p>
+          <p>2024-10-15</p>
+        </div>
+
+        <hr />
+
+        <div class="expiry__info">
+          <p>Ground Beef</p>
+          <p>2024-05-05</p>
+        </div>
+
+        <hr />
+
+        <div class="expiry__info">
+          <p>Feta Cheese</p>
+          <p>2024-12-01</p>
+        </div>
+
+        <hr />
+
+        <div class="expiry__info">
+          <p>Olive Oil</p>
+          <p>2024-12-01</p>
+        </div>
+      </div>
+
+      <!-- Expense Tracking Card -->
+      <div class="card">
+        <h2>Monthly Expenses (Bar)</h2>
+        <canvas id="myDashBarChart"></canvas>
+      </div>
+
     </div>
 
     <div class="overlay hidden"></div>
@@ -258,7 +227,7 @@
       lucide.createIcons();
     </script>
 
-<!-- Chart.js -->
+    <!-- Chart.js -->
     <script>
       const dashbar = document.getElementById("myDashBarChart").getContext("2d");
       const dash = new Chart(dashbar, {
@@ -311,5 +280,6 @@
         },
       });
     </script>
-  </body>
+</body>
+
 </html>
