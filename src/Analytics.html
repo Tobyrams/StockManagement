@@ -1,219 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/style.css" />
-    <!-- favIcons -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/favicon_io/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon_io/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/favicon_io/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/favicon_io/site.webmanifest" />
-    <!-- Animate.JS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style></style>
-    <title>Analytics</title>
-  </head>
 
-  <body>
-    <nav>
-      <div class="nav__container">
-        <div class="sideToggleOpen">
-          <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- favIcons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <!-- Animate.JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style></style>
+  <title>Analytics</title>
+</head>
 
-        <div class="nav__heading">
-          <h1>Data Analytics</h1>
-          <p>Overview of data</p>
-        </div>
-
-        <div class="nav__date">
-          <i data-lucide="calendar"></i>
-          <span id="currentDate"></span>
-        </div>
-      </div>
-    </nav>
-
-    <div class="sidePanel hidden animate__animated">
-      <div class="sidePanel__header">
-        <h2>BakeTrack</h2>
-        <a href="#" class="sideToggleClose">
-          <i class="sidePanel__icon" data-lucide="chevrons-left"></i
-        ></a>
-      </div>
-      <a href="/Dashboard.html" class="sidePanel__Tabs"
-        ><i data-lucide="home"></i>Home</a
-      >
-      <a href="/src/Stock.html" class="sidePanel__Tabs"
-        ><i data-lucide="layers"></i>Stock</a
-      >
-      <a href="/src/ingredients.html" class="sidePanel__Tabs"
-        ><i data-lucide="shopping-basket"></i>Ingredients</a
-      >
-      <a href="/src/Product.html" class="sidePanel__Tabs"
-        ><i data-lucide="package"></i>Product</a
-      >
-      <a href="/src/Analytics.html" class="sidePanel__Tabs active"
-        ><i data-lucide="line-chart"></i>Analytics</a
-      >
-      <a href="/src/Finances.html" class="sidePanel__Tabs"
-        ><i data-lucide="hand-coins"></i>Finances</a
-      >
-      <a href="/index.html" class="sidePanel__Tabs"
-        ><i data-lucide="log-out"></i><b>LogOut</b></a
-      >
-    </div>
-
-    <div class="dashboard__container">
-      <div class="card">
-        <h2>Monthly Expenses (Pie)</h2>
-        <canvas id="myPieChart"></canvas>
+<body class="animate__animated animate__fadeIn animate__slow">
+  <nav>
+    <div class="nav__container">
+      <div class="sideToggleOpen">
+        <i class="sidePanel__icon" data-lucide="chevrons-right"></i>
       </div>
 
-      <div class="card">
-        <h2>Monthly Expenses (Bar)</h2>
-        <canvas id="myBarChart"></canvas>
+      <div class="nav__heading">
+        <h1>Data Analytics</h1>
+        <p>Overview of data</p>
+      </div>
+
+      <div class="nav__date">
+        <i data-lucide="calendar"></i>
+        <span id="currentDate"></span>
       </div>
     </div>
+  </nav>
 
-    <div class="overlay hidden"></div>
+  <div class="sidePanel hidden animate__animated">
+    <div class="sidePanel__header">
+      <h2>BakeTrack</h2>
+      <a href="#" class="sideToggleClose">
+        <i class="sidePanel__icon" data-lucide="chevrons-left"></i></a>
+    </div>
+    <a href="/Dashboard.html" class="sidePanel__Tabs"><i data-lucide="home"></i>Home</a>
+    <a href="/src/Stock.html" class="sidePanel__Tabs"><i data-lucide="layers"></i>Stock</a>
+    <a href="/src/ingredients.html" class="sidePanel__Tabs"><i data-lucide="shopping-basket"></i>Ingredients</a>
+    <a href="/src/Product.html" class="sidePanel__Tabs"><i data-lucide="package"></i>Product</a>
+    <a href="/src/Analytics.html" class="sidePanel__Tabs active"><i data-lucide="line-chart"></i>Analytics</a>
+    <a href="/src/Finances.html" class="sidePanel__Tabs"><i data-lucide="hand-coins"></i>Finances</a>
+    <a href="/index.html" class="sidePanel__Tabs"><i data-lucide="log-out"></i><b>LogOut</b></a>
+  </div>
 
-    <script src="/src/script.js"></script>
-    <!-- Lucid Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-      lucide.createIcons();
-    </script>
+  <div class="dashboard__container">
 
-    <script>
-      // Pie and Bar Charts/Graphs
+    <div class="container_toggles animate__animated">
 
-      const ctx = document.getElementById("myPieChart").getContext("2d");
-      const analyticsBar = document
-        .getElementById("myBarChart")
-        .getContext("2d");
+      <div class="task_toggles">
+        <button id="toggle-Pie" class="task_toggle task-toggle--active">Pie Graph</button>
+        <button id="toggle-Bar" class="task_toggle">Bar Graph</button>
+      </div>
 
-      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(0, "rgba(50, 50, 50, 0.2)");
-      gradient.addColorStop(1, "rgba(50, 50, 50, 1)");
+    </div>
 
-      const mydoughnutChart = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "Monthly Expenses",
-              data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
-              backgroundColor: gradient,
-              borderColor: "rgba(255, 255, 255, 1)",
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "top",
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  let label = context.label || "";
-                  if (label) {
-                    label += ": ";
-                  }
-                  label += context.raw;
-                  return label;
-                },
+    <div class="card pieCard animate__animated animate__slideInLeft animation-faster">
+      <h2>Monthly Expenses (Pie)</h2>
+      <canvas id="myPieChart"></canvas>
+    </div>
+
+    <div class="card barCard hidden animate__animated animate__slideInRight animation-faster">
+      <h2>Monthly Expenses (Bar)</h2>
+      <canvas id="myBarChart"></canvas>
+    </div>
+  </div>
+
+  <div class="overlay hidden"></div>
+
+  <script src="/src/script.js"></script>
+  <!-- Lucid Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <script>
+    // Pie and Bar Charts/Graphs
+
+    const ctx = document.getElementById("myPieChart").getContext("2d");
+    const analyticsBar = document
+      .getElementById("myBarChart")
+      .getContext("2d");
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(50, 50, 50, 0.2)");
+    gradient.addColorStop(1, "rgba(50, 50, 50, 1)");
+
+    const mydoughnutChart = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
+        datasets: [
+          {
+            label: "Monthly Expenses",
+            data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
+            backgroundColor: gradient,
+            borderColor: "rgba(255, 255, 255, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.label || "";
+                if (label) {
+                  label += ": ";
+                }
+                label += context.raw;
+                return label;
               },
             },
           },
         },
-      });
+      },
+    });
 
-      const mybarChart = new Chart(analyticsBar, {
-        type: "bar",
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-          ],
-          datasets: [
-            {
-              label: "Monthly Expenses",
-              data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
-              backgroundColor: "rgb(0,0,0)",
-              borderColor: "rgba(255, 255, 255, 1)",
-              borderWidth: 1,
-              borderRadius: 10,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: "top",
-            },
-            tooltip: {
-              callbacks: {
-                label: function (context) {
-                  let label = context.label || "";
-                  if (label) {
-                    label += ": ";
-                  }
-                  label += context.raw;
-                  return label;
-                },
+    const mybarChart = new Chart(analyticsBar, {
+      type: "bar",
+      data: {
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
+        datasets: [
+          {
+            label: "Monthly Expenses",
+            data: [200, 100, 180, 160, 220, 120, 150, 300, 160, 60, 180, 240],
+            backgroundColor: "rgb(0,0,0)",
+            borderColor: "rgba(255, 255, 255, 1)",
+            borderWidth: 1,
+            borderRadius: 10,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                let label = context.label || "";
+                if (label) {
+                  label += ": ";
+                }
+                label += context.raw;
+                return label;
               },
             },
           },
         },
-      });
-    </script>
-  </body>
+      },
+    });
+  </script>
+</body>
+
 </html>

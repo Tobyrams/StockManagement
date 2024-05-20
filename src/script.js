@@ -412,3 +412,50 @@ function comingSoon() {
     timer: 1500,
   });
 }
+
+// Analytics Graph toggle
+const togglePieBtn = document.getElementById("toggle-Pie");
+const toggleBarBtn = document.getElementById("toggle-Bar");
+const container_toggles = document.querySelector(".container_toggles");
+
+const pieCard = document.querySelector(".pieCard");
+const barCard = document.querySelector(".barCard");
+
+function toggleView() {
+  // Setting toggle active state
+  togglePieBtn.classList.toggle("task-toggle--active");
+  toggleBarBtn.classList.toggle("task-toggle--active");
+
+  // Hiding the pages
+  pieCard.classList.toggle("hidden");
+  barCard.classList.toggle("hidden");
+
+  barCard.classList.toggle("barCardStyle");
+}
+
+togglePieBtn.addEventListener("click", toggleView);
+toggleBarBtn.addEventListener("click", toggleView);
+
+/**
+ * Adds a CSS animation class to an element, then removes it after a specified time.
+ * @param {HTMLElement} className - The DOM element to animate.
+ * @param {string} animationName - The name of the CSS animation class. From (https://github.com/animate-css/animate.css)
+ * @param {number} animationTime - The time (in milliseconds) before removing the animation class.
+ */
+const clickAnimation = function (
+  className,
+  animationName,
+  animationTime = 500
+) {
+  // Add the specified animation class to the element
+  className.classList.add(animationName);
+
+  // Add a generic animation class ('animate__animated') to trigger the animation
+  className.classList.add("animate__animated");
+
+  // Set a timeout to remove both animation classes after the specified time
+  setTimeout(() => {
+    className.classList.remove(animationName);
+    className.classList.remove("animate__animated");
+  }, animationTime);
+};
