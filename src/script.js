@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.pathname === "/Dashboard.html" &&
+    localStorage.getItem("isAdmin") === "true" &&
     localStorage.getItem("adminLoggedIn") !== "true"
   ) {
     setTimeout(() => {
