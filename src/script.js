@@ -34,10 +34,39 @@ if (toggeOpen || toggeClose || overlay) {
     // overlay.classList.add("hidden");
   });
 }
-// Login
+// ------------------ Login Feature -----------------
 const loginForm = document.getElementById("loginForm");
 
-// Function to set the visibility of buttons based on local storage
+//Removes admin role from local storage when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+  if (
+    window.location.pathname === "/index.html" ||
+    window.location.pathname === "/signup.html"
+  ) {
+    localStorage.removeItem("isAdmin");
+    localStorage.removeItem("adminLoggedIn");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (
+    window.location.pathname === "/Dashboard.html" &&
+    localStorage.getItem("adminLoggedIn") !== "true"
+  ) {
+    setTimeout(() => {
+      Toastify({
+        text: "Welcome Admin",
+        style: {
+          background: "black",
+        },
+      }).showToast();
+
+      localStorage.setItem("adminLoggedIn", "true"); // Set the flag in localStorage
+    }, 1000);
+  }
+});
+
+// Function to set the role restrictions
 function setRoleRestrictions() {
   var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
   var isAdmin = localStorage.getItem("isAdmin");
@@ -46,16 +75,6 @@ function setRoleRestrictions() {
     buttons.forEach(function (button) {
       button.style.visibility = "visible";
     });
-
-    setTimeout(() => {
-      Toastify({
-        text: "Welcome Admin",
-        className: "info",
-        style: {
-          background: "Black",
-        },
-      }).showToast();
-    }, 1000);
   } else if (isAdmin === "false") {
     buttons.forEach(function (button) {
       button.style.visibility = "hidden";
@@ -69,7 +88,6 @@ if (loginForm) {
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
-    localStorage.setItem("username", email);
 
     if (email === "admin12@gmail.com" && password === "admin123") {
       window.location.href = "/Dashboard.html";

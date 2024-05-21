@@ -439,7 +439,7 @@ body {
 .card__lg {
   margin-top: 1rem;
   flex: 1 0 calc(50% - 10px); /* Two items per row */
-  width: 500px;
+  /* width: 500px; */
   /* height: 400px; */
   position: relative;
 
@@ -470,6 +470,13 @@ body {
     position: absolute;
     right: 20px;
     padding-bottom: 20px;
+  }
+
+  @media (max-width: 576px) {
+    canvas {
+      max-width: 82vw;
+      min-width: 82vw;
+    }
   }
 }
 .card__lowStock {
