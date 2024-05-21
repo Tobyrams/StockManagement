@@ -41,18 +41,17 @@ const loginForm = document.getElementById("loginForm");
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.pathname === "/index.html" ||
-    window.location.pathname === "/signup.html"
+    window.location.pathname === "/signup.html" ||
+    window.location.pathname === "https://toby-stockymanage.netlify.app"
   ) {
     localStorage.removeItem("isAdmin");
-    localStorage.removeItem("adminLoggedIn");
   }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
   if (
     window.location.pathname === "/Dashboard.html" &&
-    localStorage.getItem("isAdmin") === "true" &&
-    localStorage.getItem("adminLoggedIn") !== "true"
+    localStorage.getItem("isAdmin") === "true"
   ) {
     setTimeout(() => {
       Toastify({
@@ -61,8 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
           background: "black",
         },
       }).showToast();
-
-      localStorage.setItem("adminLoggedIn", "true"); // Set the flag in localStorage
     }, 1000);
   }
 });
