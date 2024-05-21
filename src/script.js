@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       }).showToast();
 
-      localStorage.setItem("adminLoggedIn", "true"); // Set the flag in localStorage
+      // localStorage.setItem("adminLoggedIn", "true"); // Set the flag in localStorage
     }, 1000);
   }
 });
@@ -75,6 +75,7 @@ function setRoleRestrictions() {
     buttons.forEach(function (button) {
       button.style.visibility = "visible";
     });
+    localStorage.setItem("adminLoggedIn", "true");
   } else if (isAdmin === "false") {
     buttons.forEach(function (button) {
       button.style.visibility = "hidden";
