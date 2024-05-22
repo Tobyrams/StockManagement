@@ -84,11 +84,11 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  margin: 20rem auto;
+  /* margin: 20rem auto;
 
   @media screen and (max-width: 500px) {
     margin: 1rem auto;
-  }
+  } */
 
   form {
     display: flex;
@@ -122,6 +122,14 @@ body {
   p {
     color: rgba(0, 0, 0, 0.5);
   }
+}
+
+.modalStyle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
 }
 
 .btn,

@@ -502,6 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
    */
   function toggleModal(modal) {
     modal.classList.toggle("hidden");
+    modal.classList.add("modalStyle");
     overlay.classList.toggle("hidden");
   }
 
@@ -710,6 +711,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (addProductModal) handleModalHideAnimation(addProductModal);
         if (addFinanceModal) handleModalHideAnimation(addFinanceModal);
       }
+      overlay.classList.add("hidden");
     });
   }
 
