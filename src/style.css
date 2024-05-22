@@ -600,6 +600,11 @@ body {
 
 /* Stock management PAGE */
 
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .sub__Header {
   display: flex;
   gap: 1rem;

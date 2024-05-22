@@ -55,6 +55,16 @@ function showLoginPage() {
 }
 
 // ------------------ Auth ---------------------------
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem("currentUser"));
+}
+function getUserRole() {
+  const user = getCurrentUser();
+  return user ? user.role : null;
+}
+
+console.log(getUserRole());
+
 document.addEventListener("DOMContentLoaded", function () {
   const currUser = JSON.parse(localStorage.getItem("currentUser"));
   const loginForm = document.getElementById("loginForm");
@@ -74,6 +84,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })();
 
+  // Initialize items in localStorage on startup
+  (function initializeItems() {
+    if (!localStorage.getItem("stockItems")) {
+      const initialItems = [
+        { name: "Rice", quantity: 25, unit: "kg", expiry: "2024-10-15" },
+      ];
+      localStorage.setItem("stockItems", JSON.stringify(initialItems));
+    }
+  })();
+
   function setRoleRestrictions(currentUser) {
     var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
 
@@ -89,13 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function logUserOut() {
-    Toastify({
-      text: "Logging out... ",
-      style: {
-        background: "black",
-      },
-    }).showToast();
-
+    ToastMessage("Logging out... ", "black", "_");
     setTimeout(() => {
       window.location.href = "/index.html";
     }, 1500);
@@ -103,13 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showWelcomeMessage(currentUser) {
     setTimeout(() => {
-      Toastify({
-        text: "Welcome " + currentUser.email,
-        duration: 3000,
-        style: {
-          background: "black",
-        },
-      }).showToast();
+      ToastMessage("Welcome " + currentUser.email, "black", "_", 3000);
     }, 1000);
   }
 
@@ -195,12 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("currentUser", JSON.stringify(user));
         window.location.href = "/Dashboard.html";
       } else {
-        Toastify({
-          text: "Invalid email or password",
-          style: {
-            background: "red",
-          },
-        }).showToast();
+        ToastMessage("Invalid email or password", "red");
       }
     });
   }
@@ -212,17 +215,11 @@ document.addEventListener("DOMContentLoaded", function () {
       // Get the form data
       const email = document.getElementById("signupEmail").value;
       const password = document.getElementById("signupPassword").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
 
       let users = JSON.parse(localStorage.getItem("users")) || [];
       //Check if email already exists
       if (users.find((user) => user.email === email)) {
-        Toastify({
-          text: "Email already exists",
-          style: {
-            background: "red",
-          },
-        }).showToast();
+        ToastMessage("Email already exists", "red");
         return;
       }
 
@@ -231,13 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
       users.push(newUser);
       //Save the updated user list to local storage
       localStorage.setItem("users", JSON.stringify(users));
-
-      Toastify({
-        text: "Account created!",
-        style: {
-          background: "black",
-        },
-      }).showToast();
+      ToastMessage("Account created!", "black");
       //clear the input
       signupForm.reset();
       showLoginPage();
@@ -253,88 +244,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// ------------------ Login Feature -----------------
-// const loginForm = document.getElementById("loginForm");
-
-//Removes admin role from local storage when the page loads
-// document.addEventListener("DOMContentLoaded", function () {
-//   if (
-//     window.location.pathname === "/index.html" ||
-//     window.location.pathname === "/signup.html" ||
-//     window.location.origin === "https://toby-stockymanage.netlify.app"
-//   ) {
-//     localStorage.removeItem("isAdmin");
-//   }
-// });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   if (
-//     window.location.pathname === "/Dashboard.html" &&
-//     localStorage.getItem("isAdmin") === "true"
-//   ) {
-//     setTimeout(() => {
-//       Toastify({
-//         text: "Welcome Admin",
-//         style: {
-//           background: "black",
-//         },
-//       }).showToast();
-//     }, 1000);
-//   }
-// });
-
-// Function to set the role restrictions
-function setRoleRestrictions() {
-  var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
-  var isAdmin = localStorage.getItem("isAdmin");
-
-  if (isAdmin === "true") {
-    buttons.forEach(function (button) {
-      button.style.visibility = "visible";
-    });
-  } else if (isAdmin === "false") {
-    buttons.forEach(function (button) {
-      button.style.visibility = "hidden";
-    });
-  }
-}
-
-// if (loginForm) {
-//   loginForm.addEventListener("submit", function (event) {
-//     event.preventDefault();
-
-//     var email = document.getElementById("email").value;
-//     var password = document.getElementById("password").value;
-
-//     if (email === "admin12@gmail.com" && password === "admin123") {
-//       window.location.href = "/Dashboard.html";
-//       localStorage.setItem("isAdmin", "true");
-//     } else {
-//       window.location.href = "/Dashboard.html";
-//       localStorage.setItem("isAdmin", "false");
-//     }
-//   });
-// }
-
-// Set the button visibility when the page loads
-// document.addEventListener("DOMContentLoaded", function () {
-//   setRoleRestrictions();
-// });
-
 // Dashboard date
 
 // Get the current date
-const currentDate = new Date();
-const day = String(currentDate.getDate()).padStart(2, "0"); // Ensures two-digit format with leading zero if necessary
-const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so we add 1
-const year = currentDate.getFullYear();
-const formattedDate = `${day}-${month}-${year}`;
+// const currentDate = new Date();
+// const day = String(currentDate.getDate()).padStart(2, "0"); // Ensures two-digit format with leading zero if necessary
+// const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so we add 1
+// const year = currentDate.getFullYear();
+// const formattedDate = `${day}-${month}-${year}`;
 
-// Update the content of the element with id "currentDate"
-const currentDateElement = document.getElementById("currentDate");
-if (currentDateElement) {
-  currentDateElement.textContent = formattedDate;
-}
+// // Update the content of the element with id "currentDate"
+// const currentDateElement = document.getElementById("currentDate");
+// if (currentDateElement) {
+//   currentDateElement.textContent = formattedDate;
+// }
 // ---------------------Card Horizontal  Scroll------------------
 // https://www.youtube.com/watch?v=C9EWifQ5xqA
 
@@ -456,243 +379,483 @@ const editItemForm = document.getElementById("editItemForm");
 const addProductForm = document.getElementById("addProductForm");
 const addFinanceForm = document.getElementById("addFinanceForm");
 
-// Btn event listeners ------------------------------
+const cardsContainer = document.getElementById("cardsContainer");
+const cardsExpiryTContainer = document.getElementById("cardsExpiryTContainer");
+let currentEditIndex = null;
 
-function addModal(btn, form, modal) {
-  btn.addEventListener("click", function () {
-    form.reset(); // Resets the form
-    modal.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  });
-}
+// ------------------------Stock Management CRUD ------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  // Functions ----------------------------------------
+  function setRoleRestrictions(currentUser) {
+    var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
 
-if (addNewItemBtn) {
-  addModal(addNewItemBtn, addItemForm, addItemModal);
-}
-
-if (addBatchBtn) {
-  addModal(addBatchBtn, addBatchForm, addBatchModal);
-}
-
-if (addProductBtn) {
-  addModal(addProductBtn, addProductForm, addProductModal);
-}
-
-if (addFinanceBtn) {
-  addModal(addFinanceBtn, addFinanceForm, addFinanceModal);
-}
-
-/**
- * Handles the animation for hiding a modal element.
- * @param {*} modal The modal element to animate.
- */
-const handleModalHideAnimation = (modal) => {
-  // Check if the modal currently has the 'animate__fadeInUp' class
-  if (modal.classList.contains("animate__fadeInUp")) {
-    // Remove 'animate__fadeInUp' and add 'animate__fadeOutDown' for hiding animation
-    modal.classList.remove("animate__fadeInUp");
-    modal.classList.add("animate__fadeOutDown");
-
-    // Hide the modal after the animation ends
-    setTimeout(() => {
-      modal.classList.add("hidden"); // Hide the modal
-      modal.classList.remove("animate__fadeOutDown"); // Reset animation class
-      modal.classList.add("animate__fadeInUp"); // Prepare for next appearance
-    }, 700);
-
-    // Hide the overlay slightly before the modal hide animation ends
-    setTimeout(() => {
-      overlay.classList.add("hidden"); // Hide the overlay
-    }, 650);
+    if (currentUser.role === "admin") {
+      buttons.forEach(function (button) {
+        button.style.visibility = "visible";
+      });
+    } else if (currentUser.role === "user") {
+      buttons.forEach(function (button) {
+        button.style.visibility = "hidden";
+      });
+    }
   }
-};
-if (overlay) {
-  overlay.addEventListener("click", function () {
-    // Check if either modals exist
-    if (
-      addItemModal ||
-      editItemModal ||
-      addBatchModal ||
-      addProductModal ||
-      addFinanceModal
-    ) {
-      // Handle animation for addItemModal if it exists
 
-      if (addItemModal) {
-        handleModalHideAnimation(addItemModal);
-      }
+  /**
+   * - Load items from localStorage and display them in the cardsContainer.
+   * - Also attach event listeners to the edit and delete buttons of each item.
+   */
+  function loadItems() {
+    // Clear the current contents of the cardsContainer
+    if (cardsContainer) {
+      cardsContainer.innerHTML = "";
 
-      // Handle animation for editItemModal if it exists
-      if (editItemModal) {
-        handleModalHideAnimation(editItemModal);
-      }
+      //Get the current user's role
+      const userRole = getUserRole();
 
-      // Handle animation for addBatchModal if it exists
-      if (addBatchModal) {
-        handleModalHideAnimation(addBatchModal);
-      }
-      // Handle animation for addProductModal if it exists
-      if (addProductModal) {
-        handleModalHideAnimation(addProductModal);
-      }
+      // Retrieve items from localStorage, or initialize an empty array if no items are found
+      const items = JSON.parse(localStorage.getItem("stockItems")) || [];
 
-      // Handle animation for addFinanceModal if it exists
-      if (addFinanceModal) {
-        handleModalHideAnimation(addFinanceModal);
+      // Loop through each item and create a div element to display it
+      items.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        const itemHr = document.createElement("hr");
+
+        // Add a class to the div for styling
+        itemDiv.classList.add("card__details");
+
+        // Set the innerHTML of the div to include the item details and action buttons
+        itemDiv.innerHTML = `
+        <p>${item.name}</p>
+        <p>${item.quantity}</p>
+        <p>${item.unit}</p>
+        <p>${item.expiry}</p>
+        <span>
+          <i class="fa-regular fa-pen-to-square card__Btn editBtn" data-index="${index}"></i>
+          <i class="fa-regular fa-trash-can card__Btn deleteBtn" data-index="${index}"></i>
+        </span>
+    `;
+
+        // Append the item div and a horizontal rule to the cardsContainer
+
+        cardsContainer.appendChild(itemDiv);
+        cardsContainer.appendChild(itemHr);
+
+        // Add a class to the cardsContainer for styling
+        cardsContainer.classList.add("cardsContainer");
+      });
+
+      // Attach event listeners to each edit and delete button
+      if (userRole === "admin") {
+        document
+          .querySelectorAll(".editBtn")
+          .forEach((btn) => btn.addEventListener("click", editItem));
+        document
+          .querySelectorAll(".deleteBtn")
+          .forEach((btn) => btn.addEventListener("click", deleteItem));
       }
     }
+  }
 
-    setTimeout(() => {
-      overlay.classList.add("hidden");
-    }, 650);
-  });
-}
+  function loadExpirtyItems() {
+    // Clear the current contents of the cardsContainer
+    if (cardsExpiryTContainer) {
+      cardsExpiryTContainer.innerHTML = "";
 
-if (addBatchForm) {
-  addBatchForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleModalHideAnimation(addBatchModal);
-    comingSoon();
-  });
-}
-if (editItemForm) {
-  editItemForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleModalHideAnimation(editItemModal);
-    comingSoon();
-  });
-}
+      // Retrieve items from localStorage, or initialize an empty array if no items are found
+      const items = JSON.parse(localStorage.getItem("stockItems")) || [];
 
-if (addProductModal) {
-  addProductForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleModalHideAnimation(addProductModal);
-    comingSoon();
-  });
-}
+      // Loop through each item and create a div element to display it
+      items.forEach((item, index) => {
+        const itemDiv = document.createElement("div");
+        const itemHr = document.createElement("hr");
 
-if (addFinanceModal) {
-  addFinanceForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    handleModalHideAnimation(addFinanceModal);
-    comingSoon();
-  });
-}
+        // Add a class to the div for styling
+        itemDiv.classList.add("expiry__info");
 
-//   Filtering the items --------------
-document.addEventListener("DOMContentLoaded", function () {
-  const searchInput = document.getElementById("stockSearch");
-  const items = document.querySelectorAll(".card__details");
-  const cardHeading = document.querySelector(".card_Heading");
-  const hrElements = document.querySelectorAll(".card hr");
+        // Set the innerHTML of the div to include the item details and action buttons
+        itemDiv.innerHTML = `
+        <p>${item.name}</p>
+        
+        <p>${item.expiry}</p>
+        
+    `;
 
-  if (searchInput) {
-    searchInput.addEventListener("input", function () {
-      const searchTerm = searchInput.value.toLowerCase();
-      let visibleItems = 0;
+        // Append the item div and a horizontal rule to the cardsContainer
 
-      items.forEach((item) => {
-        const itemName = item.querySelector("p").textContent.toLowerCase();
-        if (itemName.includes(searchTerm)) {
-          item.style.display = "";
-          visibleItems++;
-        } else {
-          item.style.display = "none";
-        }
+        cardsExpiryTContainer.appendChild(itemDiv);
+        cardsExpiryTContainer.appendChild(itemHr);
+
+        // Add a class to the cardsContainer for styling
+        cardsExpiryTContainer.classList.add("cardsContainer");
       });
+    }
+  }
 
-      // Show or hide hr elements based on visible items
-      hrElements.forEach((hr, index) => {
-        if (index < visibleItems) {
-          hr.style.display = "";
-        } else {
-          hr.style.display = "none";
-        }
-      });
+  /**
+   * Toggle visibility of modals and overlay
+   */
+  function toggleModal(modal) {
+    modal.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
+  }
 
-      // Ensure the cardHeading is always visible
-      cardHeading.style.display = visibleItems > 0 ? "" : "none";
+  const handleModalHideAnimation = (modal) => {
+    // Check if the modal currently has the 'animate__fadeInUp' class
+    if (modal.classList.contains("animate__fadeInUp")) {
+      // Remove 'animate__fadeInUp' and add 'animate__fadeOutDown' for hiding animation
+      modal.classList.remove("animate__fadeInUp");
+      modal.classList.add("animate__fadeOutDown");
+
+      // Hide the modal after the animation ends
+      setTimeout(() => {
+        modal.classList.add("hidden"); // Hide the modal
+        modal.classList.remove("animate__fadeOutDown"); // Reset animation class
+        modal.classList.add("animate__fadeInUp"); // Prepare for next appearance
+      }, 700);
+
+      // Hide the overlay slightly before the modal hide animation ends
+      setTimeout(() => {
+        overlay.classList.add("hidden"); // Hide the overlay
+      }, 650);
+    }
+  };
+
+  /**
+   * Edit an item:
+   * - Retrieve the item data from localStorage using the index from the clicked button.
+   * - Populate the edit form with the current item data.
+   * - Show the edit modal.
+   *
+   * @param {Event} e - The event object from the click event.
+   */
+  function editItem(e) {
+    // Get the index of the item to be edited from the data-index attribute of the clicked button
+    const index = e.target.dataset.index;
+
+    // Retrieve the list of items from localStorage, or initialize an empty array if no items are found
+    const items = JSON.parse(localStorage.getItem("stockItems")) || [];
+
+    // Get the specific item to be edited using the index
+    const item = items[index];
+
+    // Store the current edit index globally to reference when saving the edited item
+    currentEditIndex = index;
+
+    // Populate the edit form fields with the current item data
+    editItemForm.editname.value = item.name;
+    editItemForm.editQuantity.value = item.quantity;
+    editItemForm.editUnitOfMeasurement.value = item.unit;
+    editItemForm.editexpirydate.value = item.expiry;
+
+    // Show the edit item modal
+    toggleModal(editItemModal);
+  }
+
+  /**
+   * Delete an item:
+   * - Retrieve the item index from the clicked button.
+   * - Remove the item from the items array.
+   * - Update localStorage with the modified items array.
+   * - Reload the items to reflect the changes in the UI.
+   *
+   * @param {Event} e - The event object from the click event.
+   */
+  function deleteItem(e) {
+    // Get the index of the item to be deleted from the data-index attribute of the clicked button
+    const index = e.target.dataset.index;
+
+    // Retrieve the list of items from localStorage, or initialize an empty array if no items are found
+    const items = JSON.parse(localStorage.getItem("stockItems")) || [];
+
+    // Remove the item from the items array using the index
+    items.splice(index, 1);
+
+    // Update localStorage with the modified items array
+    localStorage.setItem("stockItems", JSON.stringify(items));
+
+    // Reload the items to update the UI
+    loadItems();
+
+    ToastMessage("Item deleted", "#40A578", "_", 3000);
+  }
+
+  // Event Listeners ----------------------------------------
+
+  //Btns -------------
+  if (addNewItemBtn) {
+    // Show the add item modal when "Add New Item" button is clicked
+    addNewItemBtn.addEventListener("click", () => {
+      addItemForm.reset();
+      toggleModal(addItemModal);
     });
+  }
+
+  if (addBatchBtn) {
+    addBatchBtn.addEventListener("click", () => {
+      addBatchForm.reset();
+      toggleModal(addBatchModal);
+    });
+  }
+
+  if (addProductBtn) {
+    addProductBtn.addEventListener("click", () => {
+      addProductForm.reset();
+      toggleModal(addProductModal);
+    });
+  }
+
+  if (addFinanceBtn) {
+    addFinanceBtn.addEventListener("click", () => {
+      addFinanceForm.reset();
+      toggleModal(addFinanceModal);
+    });
+  }
+
+  //Forms -------------
+  if (addItemForm || editItemForm) {
+    // Handle form submission to add a new item
+    addItemForm.addEventListener("submit", (e) => {
+      e.preventDefault(); // Prevent the default form submission behavior
+
+      //Crud check
+      if (getUserRole() !== "admin") {
+        ToastMessage("Only admins can add new items");
+        return;
+      }
+      // Get the values from the form inputs
+      const name = addItemForm.name.value;
+      const quantity = addItemForm.Quantity.value;
+      const unit = addItemForm.UnitOfMeasurement.value;
+      const expiry = addItemForm.expirydate.value;
+
+      // Create a new item object with the form values
+      const newItem = { name, quantity, unit, expiry };
+
+      // Retrieve the current list of items from localStorage, or initialize an empty array if no items are found
+      const items = JSON.parse(localStorage.getItem("stockItems")) || [];
+
+      // Push the new item to the items array
+      items.push(newItem);
+
+      // Save the updated items array back to localStorage
+      localStorage.setItem("stockItems", JSON.stringify(items));
+
+      // Reload the items to update the UI with the new item
+      loadItems();
+
+      // Close the add item modal
+      toggleModal(addItemModal);
+
+      ToastMessage("Item added!", "#40A578", "_", 3000);
+    });
+
+    // Handle form submission to edit an existing item
+    editItemForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      //Crud Check
+      if (getUserRole() !== "admin") {
+        ToastMessage("Only admins can add new items");
+        return;
+      }
+
+      // Get the values from the edit form inputs
+      const name = editItemForm.editname.value;
+      const quantity = editItemForm.editQuantity.value;
+      const unit = editItemForm.editUnitOfMeasurement.value;
+      const expiry = editItemForm.editexpirydate.value;
+
+      // Create an updated item object with the form values
+      const updatedItem = { name, quantity, unit, expiry };
+
+      // Retrieve the current list of items from localStorage, or initialize an empty array if no items are found
+      const items = JSON.parse(localStorage.getItem("stockItems")) || [];
+
+      // Update the item at the current edit index with the new values
+      items[currentEditIndex] = updatedItem;
+
+      // Save the updated items array back to localStorage
+      localStorage.setItem("stockItems", JSON.stringify(items));
+
+      // Reload the items to update the UI with the edited item
+      loadItems();
+
+      // Close the edit item modal
+      toggleModal(editItemModal);
+
+      ToastMessage("Item updated! ", "#40A578", "_", 3000);
+    });
+  }
+
+  // Overlay -------
+  if (overlay) {
+    // Hide modals when overlay is clicked
+    overlay.addEventListener("click", () => {
+      // Check if either modals exist
+      if (
+        addItemModal ||
+        editItemModal ||
+        addBatchModal ||
+        addProductModal ||
+        addFinanceModal
+      ) {
+        if (addItemModal) handleModalHideAnimation(addItemModal);
+        if (editItemModal) handleModalHideAnimation(editItemModal);
+        if (addBatchModal) handleModalHideAnimation(addBatchModal);
+        if (addProductModal) handleModalHideAnimation(addProductModal);
+        if (addFinanceModal) handleModalHideAnimation(addFinanceModal);
+      }
+    });
+  }
+
+  // TODO: Add features to perfom crud
+  if (addBatchForm) {
+    addBatchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      handleModalHideAnimation(addBatchModal);
+      comingSoon();
+    });
+  }
+
+  if (addProductModal) {
+    addProductForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      handleModalHideAnimation(addProductModal);
+      comingSoon();
+    });
+  }
+
+  if (addFinanceModal) {
+    addFinanceForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      handleModalHideAnimation(addFinanceModal);
+      comingSoon();
+    });
+  }
+
+  // Loading -----------
+  loadItems();
+  loadExpirtyItems();
+
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    setRoleRestrictions(currentUser); // Apply role restrictions on page load
   }
 });
 
-//   Adding items to the form------------
+// //   Filtering the items --------------
+// document.addEventListener("DOMContentLoaded", function () {
+//   const searchInput = document.getElementById("stockSearch");
+//   const items = document.querySelectorAll(".card__details");
+//   const cardHeading = document.querySelector(".card_Heading");
+//   const hrElements = document.querySelectorAll(".card hr");
 
-if (addItemForm) {
-  addItemForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+//   if (searchInput) {
+//     searchInput.addEventListener("input", function () {
+//       const searchTerm = searchInput.value.toLowerCase();
+//       let visibleItems = 0;
 
-    const name = document.getElementById("name").value;
-    const quantity = document.getElementById("Quantity").value;
-    const unit = document.getElementById("UnitOfMeasurement").value;
-    const expiryDate = document.getElementById("expirydate").value;
+//       items.forEach((item) => {
+//         const itemName = item.querySelector("p").textContent.toLowerCase();
+//         if (itemName.includes(searchTerm)) {
+//           item.style.display = "";
+//           visibleItems++;
+//         } else {
+//           item.style.display = "none";
+//         }
+//       });
 
-    const newItem = document.createElement("div");
-    newItem.classList.add("card__details");
-    newItem.innerHTML = `
-            
-            <p>${name}</p>
-            <p>${quantity}</p>
-            <p>${unit}</p>
-            <p>${expiryDate}</p>
-            <span>
-            <i class="fa-regular fa-pen-to-square card__Btn"></i>
-            <i class="fa-regular fa-trash-can card__Btn"></i>
-            </span>
-          `;
+//       // Show or hide hr elements based on visible items
+//       hrElements.forEach((hr, index) => {
+//         if (index < visibleItems) {
+//           hr.style.display = "";
+//         } else {
+//           hr.style.display = "none";
+//         }
+//       });
 
-    const card = document.querySelector(".card");
-    const hr = document.createElement("hr");
+//       // Ensure the cardHeading is always visible
+//       cardHeading.style.display = visibleItems > 0 ? "" : "none";
+//     });
+//   }
+// });
 
-    card.appendChild(hr);
-    card.appendChild(newItem);
-    card.appendChild(hr);
+// //   Adding items to the form------------
 
-    // Clear the form
-    addItemForm.reset();
+// if (addItemForm) {
+//   addItemForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
 
-    // Hide the modal
-    addItemModal.classList.add("hidden");
-    overlay.classList.add("hidden");
-  });
-}
+//     const name = document.getElementById("name").value;
+//     const quantity = document.getElementById("Quantity").value;
+//     const unit = document.getElementById("UnitOfMeasurement").value;
+//     const expiryDate = document.getElementById("expirydate").value;
 
-//   function to remove the item from the list when trash button is clicked
-const card = document.querySelector(".card");
-if (card) {
-  card.addEventListener("click", (event) => {
-    if (event.target.classList.contains("fa-trash-can")) {
-      const cardDetails = event.target.closest(".card__details");
-      const hr = cardDetails.nextElementSibling;
-      cardDetails.remove();
-      hr.remove();
-    }
-  });
+//     const newItem = document.createElement("div");
+//     newItem.classList.add("card__details");
+//     newItem.innerHTML = `
 
-  //function for the edit button
-  card.addEventListener("click", (event) => {
-    if (event.target.classList.contains("fa-pen-to-square")) {
-      const cardDetails = event.target.closest(".card__details");
-      const hr = cardDetails.nextElementSibling;
+//             <p>${name}</p>
+//             <p>${quantity}</p>
+//             <p>${unit}</p>
+//             <p>${expiryDate}</p>
+//             <span>
+//             <i class="fa-regular fa-pen-to-square card__Btn"></i>
+//             <i class="fa-regular fa-trash-can card__Btn"></i>
+//             </span>
+//           `;
 
-      // Get the values from the card details
-      const name = cardDetails.children[0].textContent;
-      const quantity = cardDetails.children[1].textContent;
-      const unit = cardDetails.children[2].textContent;
-      const expiryDate = cardDetails.children[3].textContent;
+//     const card = document.querySelector(".card");
+//     const hr = document.createElement("hr");
 
-      // Fill the form with the values
-      document.getElementById("editname").value = name;
-      document.getElementById("editQuantity").value = quantity;
-      document.getElementById("editUnitOfMeasurement").value = unit;
-      document.getElementById("editexpirydate").value = expiryDate;
+//     card.appendChild(hr);
+//     card.appendChild(newItem);
+//     card.appendChild(hr);
 
-      // Show the modal
-      editItemModal.classList.remove("hidden");
-      overlay.classList.remove("hidden");
-    }
-  });
-}
+//     // Clear the form
+//     addItemForm.reset();
+
+//     // Hide the modal
+//     addItemModal.classList.add("hidden");
+//     overlay.classList.add("hidden");
+//   });
+// }
+
+// //   function to remove the item from the list when trash button is clicked
+// const card = document.querySelector(".card");
+// if (card) {
+//   card.addEventListener("click", (event) => {
+//     if (event.target.classList.contains("fa-trash-can")) {
+//       const cardDetails = event.target.closest(".card__details");
+//       const hr = cardDetails.nextElementSibling;
+//       cardDetails.remove();
+//       hr.remove();
+//     }
+//   });
+
+//   //function for the edit button
+//   card.addEventListener("click", (event) => {
+//     if (event.target.classList.contains("fa-pen-to-square")) {
+//       const cardDetails = event.target.closest(".card__details");
+//       const hr = cardDetails.nextElementSibling;
+
+//       // Get the values from the card details
+//       const name = cardDetails.children[0].textContent;
+//       const quantity = cardDetails.children[1].textContent;
+//       const unit = cardDetails.children[2].textContent;
+//       const expiryDate = cardDetails.children[3].textContent;
+
+//       // Fill the form with the values
+//       document.getElementById("editname").value = name;
+//       document.getElementById("editQuantity").value = quantity;
+//       document.getElementById("editUnitOfMeasurement").value = unit;
+//       document.getElementById("editexpirydate").value = expiryDate;
+
+//       // Show the modal
+//       editItemModal.classList.remove("hidden");
+//       overlay.classList.remove("hidden");
+//     }
+//   });
+// }
 
 function comingSoon() {
   Swal.fire({
@@ -750,3 +913,34 @@ const clickAnimation = function (
     className.classList.remove("animate__animated");
   }, animationTime);
 };
+
+/**
+ * Creates a toast message with customizable background color and font color.
+ * Source: [Toastify Documentation](https://github.com/apvarun/toastify-js/blob/master/README.md)
+ * @param {string} message - The message to be displayed in the toast.
+ * @param {string} backgroundColor - The background color of the toast. Defaults to a gradient from green to light green.
+ * @param {string} fontColor - The font color of the toast message. Defaults to white.
+ * @param {number} duration - The duration in milliseconds for which the toast message should be displayed. Defaults to 1000ms.
+ * @param {string} gravity - The gravity direction for the toast message. 'top' or  'bottom'
+ * @param {string} position - The position of the toast message.  'left','center' or 'right'
+ */
+function ToastMessage(
+  Message,
+  BackgroundColor = "Black",
+  FontColor = "white",
+  Duration = 1000,
+  Gravity = "top",
+  Position = "right"
+) {
+  Toastify({
+    text: Message,
+    duration: Duration,
+    gravity: Gravity, // 'top' or  'bottom'
+    position: Position, //'left','center' or 'right'
+
+    style: {
+      background: BackgroundColor,
+      color: FontColor,
+    },
+  }).showToast();
+}
