@@ -124,7 +124,8 @@ body {
   }
 }
 
-.btn {
+.btn,
+.btn_logins {
   background-color: var(--btn-color);
   color: white;
   border-radius: 5px;
