@@ -31,38 +31,257 @@ if (toggeOpen || toggeClose || overlay) {
     }
     removeAnimation();
     sidePanel.classList.add("animate__slideOutLeft");
-    // overlay.classList.add("hidden");
   });
 }
-// ------------------ Login Feature -----------------
-const loginForm = document.getElementById("loginForm");
+/**
+ * Redirect to signup page
+ */
+function showSignupPage() {
+  const loginPage = document.querySelector(".login_page");
+  const signupPage = document.querySelector(".signup_page");
 
-//Removes admin role from local storage when the page loads
+  loginPage.classList.toggle("hidden");
+  signupPage.classList.toggle("hidden");
+}
+/**
+ * Redirect to login page
+ */
+function showLoginPage() {
+  const loginPage = document.querySelector(".login_page");
+  const signupPage = document.querySelector(".signup_page");
+
+  loginPage.classList.toggle("hidden");
+  signupPage.classList.toggle("hidden");
+}
+
+// ------------------ Auth ---------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  if (
-    window.location.pathname === "/index.html" ||
-    window.location.pathname === "/signup.html" ||
-    window.location.pathname === "https://toby-stockymanage.netlify.app"
-  ) {
-    localStorage.removeItem("isAdmin");
+  const currUser = JSON.parse(localStorage.getItem("currentUser"));
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+  const logOutBtn = document.querySelector(".logOutBtn");
+
+  // add an admin user to local storage on first load
+  (function addDefaultAdmin() {
+    if (!localStorage.getItem("users")) {
+      const adminUser = {
+        email: "admin@gmail.com",
+        password: "admin123",
+        role: "admin",
+      };
+      const users = [adminUser];
+      localStorage.setItem("users", JSON.stringify(users));
+    }
+  })();
+
+  function setRoleRestrictions(currentUser) {
+    var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
+
+    if (currentUser.role === "admin") {
+      buttons.forEach(function (button) {
+        button.style.visibility = "visible";
+      });
+    } else if (currentUser.role === "user") {
+      buttons.forEach(function (button) {
+        button.style.visibility = "hidden";
+      });
+    }
   }
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-  if (
-    window.location.pathname === "/Dashboard.html" &&
-    localStorage.getItem("isAdmin") === "true"
-  ) {
+  function logUserOut() {
+    Toastify({
+      text: "Logging out... ",
+      style: {
+        background: "black",
+      },
+    }).showToast();
+
+    setTimeout(() => {
+      window.location.href = "/index.html";
+    }, 1500);
+  }
+
+  function showWelcomeMessage(currentUser) {
     setTimeout(() => {
       Toastify({
-        text: "Welcome Admin",
+        text: "Welcome " + currentUser.email,
+        duration: 3000,
         style: {
           background: "black",
         },
       }).showToast();
     }, 1000);
   }
+
+  // If on dashboard page, check if the user is logged in
+  if (window.location.pathname.includes("Dashboard.html")) {
+    if (currUser) {
+      // displayHomePage(currenUser);
+
+      setRoleRestrictions(currUser);
+      const welcomeShown =
+        JSON.parse(localStorage.getItem("welcomeShown")) || false;
+      if (!welcomeShown) {
+        showWelcomeMessage(currUser);
+        localStorage.setItem("welcomeShown", true);
+      }
+    } else {
+      //Redirect to login page if not logged in
+      window.location.href = "index.html";
+    }
+  }
+  // If on Stock page, check if the user is logged in
+  if (window.location.pathname.includes("Stock.html")) {
+    if (currUser) {
+      setRoleRestrictions(currUser);
+    } else {
+      //Redirect to login if not logged in
+      window.location.href = "/index.html";
+    }
+  }
+
+  // If on ingredients page, check if the user is logged in
+  if (window.location.pathname.includes("ingredients.html")) {
+    if (currUser) {
+      setRoleRestrictions(currUser);
+    } else {
+      //Redirect to login if not logged in
+      window.location.href = "/index.html";
+    }
+  }
+
+  // If on product page, check if the user is logged in
+  if (window.location.pathname.includes("Product.html")) {
+    if (currUser) {
+      setRoleRestrictions(currUser);
+    } else {
+      //Redirect to login if not logged in
+      window.location.href = "/index.html";
+    }
+  }
+
+  // If on analytics page, check if the user is logged in
+  if (window.location.pathname.includes("Analytics.html")) {
+    if (currUser) {
+      setRoleRestrictions(currUser);
+    } else {
+      //Redirect to login if not logged in
+      window.location.href = "/index.html";
+    }
+  }
+
+  // If on Finances page, check if the user is logged in
+  if (window.location.pathname.includes("Finances.html")) {
+    if (currUser) {
+      setRoleRestrictions(currUser);
+    } else {
+      //Redirect to login if not logged in
+      window.location.href = "/index.html";
+    }
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (user) {
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        window.location.href = "/Dashboard.html";
+      } else {
+        Toastify({
+          text: "Invalid email or password",
+          style: {
+            background: "red",
+          },
+        }).showToast();
+      }
+    });
+  }
+
+  if (signupForm) {
+    signupForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Get the form data
+      const email = document.getElementById("signupEmail").value;
+      const password = document.getElementById("signupPassword").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      //Check if email already exists
+      if (users.find((user) => user.email === email)) {
+        Toastify({
+          text: "Email already exists",
+          style: {
+            background: "red",
+          },
+        }).showToast();
+        return;
+      }
+
+      //Add the new user to the list of users
+      const newUser = { email, password, role: "user" };
+      users.push(newUser);
+      //Save the updated user list to local storage
+      localStorage.setItem("users", JSON.stringify(users));
+
+      Toastify({
+        text: "Account created!",
+        style: {
+          background: "black",
+        },
+      }).showToast();
+      //clear the input
+      signupForm.reset();
+      showLoginPage();
+    });
+  }
+
+  if (logOutBtn) {
+    logOutBtn.addEventListener("click", function () {
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("welcomeShown");
+      logUserOut();
+    });
+  }
 });
+
+// ------------------ Login Feature -----------------
+// const loginForm = document.getElementById("loginForm");
+
+//Removes admin role from local storage when the page loads
+// document.addEventListener("DOMContentLoaded", function () {
+//   if (
+//     window.location.pathname === "/index.html" ||
+//     window.location.pathname === "/signup.html" ||
+//     window.location.origin === "https://toby-stockymanage.netlify.app"
+//   ) {
+//     localStorage.removeItem("isAdmin");
+//   }
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   if (
+//     window.location.pathname === "/Dashboard.html" &&
+//     localStorage.getItem("isAdmin") === "true"
+//   ) {
+//     setTimeout(() => {
+//       Toastify({
+//         text: "Welcome Admin",
+//         style: {
+//           background: "black",
+//         },
+//       }).showToast();
+//     }, 1000);
+//   }
+// });
 
 // Function to set the role restrictions
 function setRoleRestrictions() {
@@ -80,34 +299,27 @@ function setRoleRestrictions() {
   }
 }
 
-if (loginForm) {
-  loginForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+// if (loginForm) {
+//   loginForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
 
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
+//     var email = document.getElementById("email").value;
+//     var password = document.getElementById("password").value;
 
-    if (email === "admin12@gmail.com" && password === "admin123") {
-      window.location.href = "/Dashboard.html";
-      localStorage.setItem("isAdmin", "true");
-    } else {
-      window.location.href = "/Dashboard.html";
-      localStorage.setItem("isAdmin", "false");
-    }
-  });
-}
+//     if (email === "admin12@gmail.com" && password === "admin123") {
+//       window.location.href = "/Dashboard.html";
+//       localStorage.setItem("isAdmin", "true");
+//     } else {
+//       window.location.href = "/Dashboard.html";
+//       localStorage.setItem("isAdmin", "false");
+//     }
+//   });
+// }
 
 // Set the button visibility when the page loads
-document.addEventListener("DOMContentLoaded", function () {
-  setRoleRestrictions();
-});
-
-const logOutBtn = document.querySelector(".logOutBtn");
-if (logOutBtn) {
-  logOutBtn.addEventListener("click", function () {
-    localStorage.removeItem("isAdmin");
-  });
-}
+// document.addEventListener("DOMContentLoaded", function () {
+//   setRoleRestrictions();
+// });
 
 // Dashboard date
 
@@ -173,55 +385,55 @@ if (slider) {
 
 // --------------------- FILTER ------------------
 
-// Get the input field, all card elements, and create a container for the message
-const filterInput = document.getElementById("filterInput");
-const cards = document.querySelectorAll(".card__lg");
-const lgCard = document.querySelector(".lg__cards");
-const messageContainer = document.createElement("div");
+// // Get the input field, all card elements, and create a container for the message
+// const filterInput = document.getElementById("filterInput");
+// const cards = document.querySelectorAll(".card__lg");
+// const lgCard = document.querySelector(".lg__cards");
+// const messageContainer = document.createElement("div");
 
-messageContainer.classList.add("message");
-if (lgCard) {
-  lgCard.appendChild(messageContainer); // Append the message container to the cards container
-}
+// messageContainer.classList.add("message");
+// if (lgCard) {
+//   lgCard.appendChild(messageContainer); // Append the message container to the cards container
+// }
 
-if (filterInput) {
-  // Add an event listener to the input field for input events (when user types)
-  filterInput.addEventListener("input", function () {
-    const filterText = this.value.toLowerCase();
-    let foundMatch = false; // Flag to track if a match is found
+// if (filterInput) {
+//   // Add an event listener to the input field for input events (when user types)
+//   filterInput.addEventListener("input", function () {
+//     const filterText = this.value.toLowerCase();
+//     let foundMatch = false; // Flag to track if a match is found
 
-    // Loop through each card element
-    cards.forEach((card) => {
-      const title = card.querySelector("h2").textContent.toLowerCase();
+//     // Loop through each card element
+//     cards.forEach((card) => {
+//       const title = card.querySelector("h2").textContent.toLowerCase();
 
-      // Check if the title text of the card includes the filter text
-      if (title.includes(filterText)) {
-        card.style.display = "block"; // Show the card if there's a match
-        foundMatch = true; // Set flag to true if a match is found
-      } else {
-        card.style.display = "none"; // Hide the card if there's no match
-      }
-    });
+//       // Check if the title text of the card includes the filter text
+//       if (title.includes(filterText)) {
+//         card.style.display = "block"; // Show the card if there's a match
+//         foundMatch = true; // Set flag to true if a match is found
+//       } else {
+//         card.style.display = "none"; // Hide the card if there's no match
+//       }
+//     });
 
-    // Display message if no match is found
-    if (!foundMatch) {
-      messageContainer.textContent = "No matching results found."; // Set the message content
-      messageContainer.style.display = "flex";
-      messageContainer.style.height = "75vh";
-      messageContainer.style.width = "100vw";
-      messageContainer.style.fontWeight = "400";
-      messageContainer.style.fontSize = "3rem";
-      messageContainer.style.color = "red";
-      messageContainer.style.marginTop = "10px";
-      messageContainer.style.flexDirection = "column";
-      messageContainer.style.justifyContent = "center";
-      messageContainer.style.alignItems = "center";
-    } else {
-      messageContainer.textContent = ""; // Clear the message if a match is found
-      messageContainer.style.display = "none"; // Hide the message container
-    }
-  });
-}
+//     // Display message if no match is found
+//     if (!foundMatch) {
+//       messageContainer.textContent = "No matching results found."; // Set the message content
+//       messageContainer.style.display = "flex";
+//       messageContainer.style.height = "75vh";
+//       messageContainer.style.width = "100vw";
+//       messageContainer.style.fontWeight = "400";
+//       messageContainer.style.fontSize = "3rem";
+//       messageContainer.style.color = "red";
+//       messageContainer.style.marginTop = "10px";
+//       messageContainer.style.flexDirection = "column";
+//       messageContainer.style.justifyContent = "center";
+//       messageContainer.style.alignItems = "center";
+//     } else {
+//       messageContainer.textContent = ""; // Clear the message if a match is found
+//       messageContainer.style.display = "none"; // Hide the message container
+//     }
+//   });
+// }
 
 // Stock Management Page
 

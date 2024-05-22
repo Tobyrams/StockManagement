@@ -19,17 +19,18 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Toastify.js -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <title>Login</title>
 </head>
 
 <body>
-  <div class="auth-container animate__animated animate__fadeIn">
+
+  <div class="auth-container login_page animate__animated animate__fadeIn">
     <h1>Login</h1>
-
     <p>Enter your login information</p>
-
     <br />
-
     <div class="authForm">
       <form id="loginForm">
         <label for="email">Email:</label>
@@ -42,20 +43,37 @@
       </form>
     </div>
     <br />
-    <p>Do you have an account? <a href=" signup.html">Register</a></p>
+    <p>Do you have an account? <a onclick="showSignupPage()">Register</a></p>
+  </div>
+
+  <div class="auth-container signup_page hidden animate__animated animate__fadeIn">
+    <h1>Get Started</h1>
+    <p>Enter your information to createa an account.</p>
+    <br />
+
+    <div class="authForm">
+      <form id="signupForm">
+
+        <label for="signupEmail">Email:</label>
+        <input type="email" id="signupEmail" name="signupEmail" required placeholder="Enter your email" /><br />
+
+        <label for="signupPassword">Password:</label>
+        <input type="password" id="signupPassword" name="signupPassword" required placeholder="Enter password" /><br />
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required
+          placeholder="Confirm password" /><br /><br />
+
+        <button class="btn" type="submit">Sign Up</button>
+      </form>
+    </div>
+    <br />
+
+    <p>Already have an account? <a onclick="showLoginPage()">Login</a></p>
   </div>
 
   <script src="/src/script.js"></script>
-  <script>
-    // document.getElementById("loginForm").addEventListener("submit", (e) => {
-    //   e.preventDefault();
-    //   window.location.href = "/Dashboard.html";
-    // });
 
-
-
-
-  </script>
 </body>
 
 </html>
