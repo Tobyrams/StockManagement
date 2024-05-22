@@ -63,7 +63,7 @@ function getUserRole() {
   return user ? user.role : null;
 }
 
-console.log(getUserRole());
+// console.log(getUserRole());
 
 document.addEventListener("DOMContentLoaded", function () {
   const currUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -94,6 +94,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })();
 
+  (function addWelcomeShown() {
+    if (!localStorage.getItem("welcomeShown")) {
+      localStorage.setItem("welcomeShown", false);
+    }
+  })();
+
   function setRoleRestrictions(currentUser) {
     var buttons = document.querySelectorAll(".btn, .card__Btn, .btn__light");
 
@@ -109,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function logUserOut() {
-    ToastMessage("Logging out... ", "black", "_");
+    ToastMessage("Logging out... ", "black", "_", 3000);
     setTimeout(() => {
       window.location.href = "/index.html";
     }, 1500);
