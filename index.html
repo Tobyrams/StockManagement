@@ -1,79 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <!-- favicon -->
+    <!-- favIcons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon_io/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon_io/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon_io/site.webmanifest" />
+    <!-- Animate.JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- fontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Toastify.js -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <title>BakeTrack.com</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/src/style.css" />
-  <!-- favicon -->
-  <!-- favIcons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
-  <link rel="manifest" href="/favicon_io/site.webmanifest" />
-  <!-- Animate.JS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  <!-- fontAwesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- Toastify.js -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <title>Login</title>
-</head>
-
-<body>
-
-  <div class="auth-container login_page animate__animated animate__fadeIn">
-    <h1>Login</h1>
-    <p>Enter your login information</p>
-    <br />
-    <div class="authForm">
-      <form id="loginForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="Enter your email" /><br />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required placeholder="Enter your password" /><br /><br />
-        <button id="loginBtn" type="submit" class="btn_logins">
-          Login
-        </button>
-      </form>
+  <body>
+    <div class="auth-container login_page animate__animated animate__fadeIn">
+      <h1>Login</h1>
+      <p>Enter your login information</p>
+      <br />
+      <div class="authForm">
+        <form id="loginForm">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Enter your email"
+          /><br />
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Enter your password"
+          /><br /><br />
+          <button id="loginBtn" type="submit" class="btn_logins">Login</button>
+        </form>
+      </div>
+      <br />
+      <p>Do you have an account? <a onclick="showSignupPage()">Register</a></p>
     </div>
-    <br />
-    <p>Do you have an account? <a onclick="showSignupPage()">Register</a></p>
-  </div>
 
-  <div class="auth-container signup_page hidden animate__animated animate__fadeIn">
-    <h1>Get Started</h1>
-    <p>Enter your information to createa an account.</p>
-    <br />
+    <div
+      class="auth-container signup_page hidden animate__animated animate__fadeIn"
+    >
+      <h1>Get Started</h1>
+      <p>Enter your information to createa an account.</p>
+      <br />
 
-    <div class="authForm">
-      <form id="signupForm">
+      <div class="authForm">
+        <form id="signupForm">
+          <label for="signupEmail">Email:</label>
+          <input
+            type="email"
+            id="signupEmail"
+            name="signupEmail"
+            required
+            placeholder="Enter your email"
+          /><br />
 
-        <label for="signupEmail">Email:</label>
-        <input type="email" id="signupEmail" name="signupEmail" required placeholder="Enter your email" /><br />
+          <label for="signupPassword">Password:</label>
+          <input
+            type="password"
+            id="signupPassword"
+            name="signupPassword"
+            required
+            placeholder="Enter password"
+          /><br />
 
-        <label for="signupPassword">Password:</label>
-        <input type="password" id="signupPassword" name="signupPassword" required placeholder="Enter password" /><br />
+          <label for="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="Confirm password"
+          /><br /><br />
 
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required
-          placeholder="Confirm password" /><br /><br />
+          <button class="btn_logins" type="submit">Sign Up</button>
+        </form>
+      </div>
+      <br />
 
-        <button class="btn_logins" type="submit">Sign Up</button>
-      </form>
+      <p>Already have an account? <a onclick="showLoginPage()">Login</a></p>
     </div>
-    <br />
 
-    <p>Already have an account? <a onclick="showLoginPage()">Login</a></p>
-  </div>
-
-  <script src="/src/script.js"></script>
-
-</body>
-
+    <script src="/src/script.js"></script>
+  </body>
 </html>

@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("loginForm");
   const signupForm = document.getElementById("signupForm");
   const logOutBtn = document.querySelector(".logOutBtn");
+  const systemResetBtn = document.querySelector(".systemResetBtn");
 
   // add an admin user to local storage on first load
   (function addDefaultAdmin() {
@@ -115,6 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function logUserOut() {
+    //Removing localStorage values
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("welcomeShown");
     ToastMessage("Logging out... ", "black", "_", 3000);
     setTimeout(() => {
       window.location.href = "/index.html";
@@ -127,12 +131,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
 
+  function displayProfileInfo(user) {
+    document.getElementById("profileEmail").textContent = user.email;
+    document.getElementById("profileRole").textContent = user.role;
+  }
+
   // If on dashboard page, check if the user is logged in
   if (window.location.pathname.includes("Dashboard.html")) {
     if (currUser) {
       // displayHomePage(currenUser);
 
       setRoleRestrictions(currUser);
+
+      displayProfileInfo(currUser);
       const welcomeShown =
         JSON.parse(localStorage.getItem("welcomeShown")) || false;
       if (!welcomeShown) {
@@ -243,9 +254,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (logOutBtn) {
     logOutBtn.addEventListener("click", function () {
-      localStorage.removeItem("currentUser");
-      localStorage.removeItem("welcomeShown");
       logUserOut();
+    });
+  }
+  if (systemResetBtn) {
+    systemResetBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (getUserRole() !== "admin") {
+        ToastMessage("Restricted Access!", "black", "_", 3000);
+        return;
+      }
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("users");
+      localStorage.removeItem("welcomeShown");
+      localStorage.removeItem("stockItems");
+      ToastMessage("Resetting system... ", "black", "_", 1500);
+      setTimeout(() => {
+        window.location.href = "/index.html";
+      }, 1500);
     });
   }
 });
@@ -372,11 +398,13 @@ const editItemModal = document.querySelector(".editItemModal");
 const addBatchModal = document.querySelector(".addBatchModal");
 const addProductModal = document.querySelector(".addProductModal");
 const addFinanceModal = document.querySelector(".addFinanceModal");
+const profileModal = document.querySelector(".profileModal");
 //Btns
 const addNewItemBtn = document.querySelector(".addNewItemBtn");
 const addBatchBtn = document.querySelector(".addBatchBtn");
 const addProductBtn = document.querySelector(".addProductBtn");
 const addFinanceBtn = document.querySelector(".addFinanceBtn");
+const viewProfile = document.querySelector(".viewProfile");
 
 //forms
 const addBatchForm = document.getElementById("addBatchForm");
@@ -589,6 +617,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event Listeners ----------------------------------------
 
   //Btns -------------
+  if (viewProfile) {
+    viewProfile.addEventListener("click", () => {
+      toggleModal(profileModal);
+    });
+  }
+
   if (addNewItemBtn) {
     // Show the add item modal when "Add New Item" button is clicked
     addNewItemBtn.addEventListener("click", () => {
@@ -619,7 +653,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //Forms -------------
-  if (addItemForm || editItemForm) {
+  if (addItemForm) {
     // Handle form submission to add a new item
     addItemForm.addEventListener("submit", (e) => {
       e.preventDefault(); // Prevent the default form submission behavior
@@ -655,13 +689,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       ToastMessage("Item added!", "#40A578", "_", 3000);
     });
-
-    // Handle form submission to edit an existing item
+  }
+  // Handle form submission to edit an existing item
+  if (editItemForm) {
     editItemForm.addEventListener("submit", (e) => {
       e.preventDefault();
       //Crud Check
       if (getUserRole() !== "admin") {
-        ToastMessage("Only admins can add new items");
+        ToastMessage("Restricted Access!", "black", "_", 3000);
         return;
       }
 
@@ -703,13 +738,15 @@ document.addEventListener("DOMContentLoaded", function () {
         editItemModal ||
         addBatchModal ||
         addProductModal ||
-        addFinanceModal
+        addFinanceModal ||
+        profileModal
       ) {
         if (addItemModal) handleModalHideAnimation(addItemModal);
         if (editItemModal) handleModalHideAnimation(editItemModal);
         if (addBatchModal) handleModalHideAnimation(addBatchModal);
         if (addProductModal) handleModalHideAnimation(addProductModal);
         if (addFinanceModal) handleModalHideAnimation(addFinanceModal);
+        if (profileModal) handleModalHideAnimation(profileModal);
       }
       overlay.classList.add("hidden");
     });

@@ -20,7 +20,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-  <title>Dashboard</title>
+  <title>BakeTrack.com</title>
 </head>
 
 <body class="animate__animated animate__fadeIn animate__slow">
@@ -41,6 +41,9 @@
         <span id="currentDate"></span>
       </div> -->
 
+      <div class="avatar__icon viewProfile">
+        <i data-lucide="circle-user" style="height: 3rem; width: 3rem;"></i>
+      </div>
     </div>
   </nav>
 
@@ -60,6 +63,8 @@
     <a class="sidePanel__Tabs logOutBtn"><i data-lucide="log-out"></i><b>LogOut</b></a>
 
   </div>
+
+  
 
   <div class="dashboard__container">
     <div class="sml__cards">
@@ -98,6 +103,19 @@
         <span><i data-lucide="box"></i></span>
         <h3>9</h3>
       </div>
+    </div>
+
+    <div class="Form profileModal hidden  animate__animated animate__fadeInUp animate__fast">
+      <div class="avatar__icon profile">
+        <i data-lucide="circle-user" style="height: 3rem; width: 3rem;"></i>
+      </div>
+      <strong><span style="color: rgb(0,0,0,.5);">Profile Details:</span></strong>
+      <form >
+        <span> <b>Email:</b>  <span id="profileEmail"></span></span>
+        <span><b>Role:</b>   <span id="profileRole"></span></span>
+        <br>
+        <button class="btn systemResetBtn">System Reset</button>
+      </form>
     </div>
 
     <div class="lg__cards">
@@ -187,8 +205,8 @@
           <p>Ingredient</p>
           <p>Expiry date</p>
         </div>
-
         <hr />
+
         <div id="cardsExpiryTContainer"></div>
 
       </div>
@@ -203,7 +221,7 @@
 
     <div class="overlay hidden"></div>
 
-    <script src="/src/script.js" type="module"></script>
+    <script src="/src/script.js" type="module" defer></script>
     <!-- Lucid Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
