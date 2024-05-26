@@ -133,9 +133,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (document.title === "Dashboard") {
     if (currUser.role === "admin") {
-      setTimeout(() => {
-        ToastMessage("Welcom Admin", "black", "_", 3000);
-      }, 1000);
+      const welcomeShown =
+        JSON.parse(localStorage.getItem("welcomeShown")) || false;
+      if (!welcomeShown) {
+        setTimeout(() => {
+          ToastMessage("Admin", "black", "_", 3000);
+          localStorage.setItem("welcomeShown", true);
+        }, 1000);
+      }
     }
   }
 
@@ -617,7 +622,6 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleModal(profileModal);
 
       const user = getCurrentUser();
-      console.log(user);
       //Display user info
       document.getElementById("profileEmail").textContent = user.email;
       document.getElementById("profileRole").textContent = user.role;
