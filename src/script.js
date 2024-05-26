@@ -131,9 +131,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
 
-  function displayProfileInfo(user) {
-    document.getElementById("profileEmail").textContent = user.email;
-    document.getElementById("profileRole").textContent = user.role;
+  if (document.title === "Dashboard") {
+    if (currUser.role === "admin") {
+      setTimeout(() => {
+        ToastMessage("Welcom Admin", "black", "_", 3000);
+      }, 1000);
+    }
   }
 
   // If on dashboard page, check if the user is logged in
@@ -142,14 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // displayHomePage(currenUser);
 
       setRoleRestrictions(currUser);
-
-      displayProfileInfo(currUser);
-      const welcomeShown =
-        JSON.parse(localStorage.getItem("welcomeShown")) || false;
-      if (!welcomeShown) {
-        showWelcomeMessage(currUser);
-        localStorage.setItem("welcomeShown", true);
-      }
     } else {
       //Redirect to login page if not logged in
       window.location.href = "index.html";
@@ -620,6 +615,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (viewProfile) {
     viewProfile.addEventListener("click", () => {
       toggleModal(profileModal);
+
+      const user = getCurrentUser();
+      console.log(user);
+      //Display user info
+      document.getElementById("profileEmail").textContent = user.email;
+      document.getElementById("profileRole").textContent = user.role;
     });
   }
 
