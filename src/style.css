@@ -37,6 +37,9 @@ body {
   a {
     text-decoration: underline;
     color: var(--btn-color);
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -478,7 +481,7 @@ body {
   .card__price {
     position: absolute;
     right: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 55px;
   }
 
   @media (max-width: 576px) {

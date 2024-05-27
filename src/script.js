@@ -125,12 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1500);
   }
 
-  function showWelcomeMessage(currentUser) {
-    setTimeout(() => {
-      ToastMessage("Welcome " + currentUser.email, "black", "_", 3000);
-    }, 1000);
-  }
-
   if (document.title === "Dashboard") {
     if (currUser.role === "admin") {
       const welcomeShown =
@@ -412,6 +406,7 @@ const addItemForm = document.getElementById("addItemForm");
 const editItemForm = document.getElementById("editItemForm");
 const addProductForm = document.getElementById("addProductForm");
 const addFinanceForm = document.getElementById("addFinanceForm");
+const filterInput = document.getElementById("filterInput");
 
 const cardsContainer = document.getElementById("cardsContainer");
 const cardsExpiryTContainer = document.getElementById("cardsExpiryTContainer");
@@ -490,6 +485,71 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Function to display items
+  function displayFilteredItems(items, userRole) {
+    const cardsContainer = document.getElementById("cardsContainer");
+
+    // Clear the current contents of the cardsContainer
+    cardsContainer.innerHTML = "";
+
+    items.forEach((item, index) => {
+      const itemDiv = document.createElement("div");
+      const itemHr = document.createElement("hr");
+
+      // Add a class to the div for styling
+      itemDiv.classList.add("card__details");
+
+      // Set the innerHTML of the div to include the item details and action buttons
+      itemDiv.innerHTML = `
+          <p class="item-name">${item.name}</p>
+          <p>${item.quantity}</p>
+          <p>${item.unit}</p>
+          <p>${item.expiry}</p>
+          <span>
+              <i class="fa-regular fa-pen-to-square card__Btn editBtn" data-index="${index}"></i>
+              <i class="fa-regular fa-trash-can card__Btn deleteBtn" data-index="${index}"></i>
+          </span>
+      `;
+
+      // Append the item div and a horizontal rule to the cardsContainer
+      cardsContainer.appendChild(itemDiv);
+      cardsContainer.appendChild(itemHr);
+
+      // Add a class to the cardsContainer for styling
+      cardsContainer.classList.add("cardsContainer");
+    });
+
+    // Attach event listeners to each edit and delete button
+    if (userRole === "admin") {
+      document
+        .querySelectorAll(".editBtn")
+        .forEach((btn) => btn.addEventListener("click", editItem));
+      document
+        .querySelectorAll(".deleteBtn")
+        .forEach((btn) => btn.addEventListener("click", deleteItem));
+    } else {
+      document.querySelectorAll(".editBtn").forEach((btn) => {
+        btn.style.visibility = "hidden";
+      });
+      document.querySelectorAll(".deleteBtn").forEach((btn) => {
+        btn.style.visibility = "hidden";
+      });
+    }
+  }
+
+  // Function to filter items
+  function filterItems() {
+    const filterInput = document
+      .getElementById("filterInput")
+      .value.toLowerCase();
+    const items = JSON.parse(localStorage.getItem("stockItems")) || [];
+    const filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(filterInput)
+    );
+
+    displayFilteredItems(filteredItems, getUserRole());
+  }
+
   function loadExpirtyItems() {
     // Clear the current contents of the cardsContainer
     if (cardsExpiryTContainer) {
@@ -513,8 +573,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <p>${item.expiry}</p>
         
     `;
-
-        // Append the item div and a horizontal rule to the cardsContainer
 
         cardsExpiryTContainer.appendChild(itemDiv);
         cardsExpiryTContainer.appendChild(itemHr);
@@ -617,6 +675,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event Listeners ----------------------------------------
 
   //Btns -------------
+
   if (viewProfile) {
     viewProfile.addEventListener("click", () => {
       toggleModal(profileModal);
@@ -781,7 +840,9 @@ document.addEventListener("DOMContentLoaded", function () {
       comingSoon();
     });
   }
-
+  if (filterInput) {
+    filterInput.addEventListener("input", filterItems);
+  }
   // Loading -----------
   loadItems();
   loadExpirtyItems();
