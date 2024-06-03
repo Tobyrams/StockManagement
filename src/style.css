@@ -265,6 +265,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.lineCard,
+.barCard {
+  width: 80%;
+}
+
 .card__details {
   display: flex;
   justify-content: center;
